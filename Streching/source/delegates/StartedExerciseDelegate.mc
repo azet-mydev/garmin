@@ -8,13 +8,13 @@ class StartedExerciseDelegate extends WatchUi.BehaviorDelegate {
     
     function onSelect() {
     	$.activityControl.stop();
-        $.stateMachine.transition(StateMachine.STARTED, StateMachine.STOP);
+        $.stateMachine.transition(StateMachine.STOP);
         return true;
     }
     
     function onBack() {
     	$.activityControl.stop();
-    	$.stateMachine.transition(StateMachine.STARTED, StateMachine.STOP);
+    	$.stateMachine.transition(StateMachine.STOP);
     	return true;
     }      
 }

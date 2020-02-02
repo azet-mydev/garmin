@@ -10,7 +10,13 @@ class StartExerciseDelegate extends WatchUi.BehaviorDelegate {
     
     function onSelect() {
         $.activityControl.start();
-        $.stateMachine.transition(StateMachine.NOT_STARTED, StateMachine.START);
+        $.stateMachine.transition(StateMachine.START);
+        $.timerService.start();
+        $.timerService.registerCallback("EXERCISE", EXERCISE_PERIOD, method(:refreshView));
         return true;
-    }  
+    }
+    
+    function refreshView() {
+		WatchUi.requestUpdate();
+	}  
 }

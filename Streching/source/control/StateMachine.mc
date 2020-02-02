@@ -1,7 +1,7 @@
 //TODO: Should be moved to class level and be private (circular dependency issue)
 
 //Views
-var startView = new StartView();
+var initialView = new InitialView();
 var exerciseView = new ExerciseView();
 
 //Delegates
@@ -11,7 +11,7 @@ var startedExerciseDelegate = new StartedExerciseDelegate();
 class StateMachine {
 
 	enum {
-		NOT_STARTED,
+		INITIAL,
 		STARTED
 	}
 	
@@ -20,10 +20,12 @@ class StateMachine {
 		STOP
 	}
 	
-	function transition(state, action){
-		switch(state) {
-			case NOT_STARTED: {
-				notStarted(action);
+	var currentState = INITIAL;
+	
+	function transition(action){
+		switch(currentState) {
+			case INITIAL: {
+				initial(action);
 				break;
 			}
 			case STARTED: {
@@ -33,10 +35,11 @@ class StateMachine {
 		}
 	}
 	
-	private function notStarted(action){
+	private function initial(action){
 		switch(action) {
 			case START: {
 				WatchUi.switchToView(exerciseView, startedExerciseDelegate, WatchUi.SLIDE_IMMEDIATE);
+				currentState=STARTED;
 				break;
 			}
 			case STOP: {
@@ -53,7 +56,8 @@ class StateMachine {
 				break;
 			}
 			case STOP: {
-				WatchUi.switchToView(startView, startExerciseDelegate, WatchUi.SLIDE_IMMEDIATE);
+				WatchUi.switchToView(initialView, startExerciseDelegate, WatchUi.SLIDE_IMMEDIATE);
+				currentState=INITIAL;
 				break;
 			}
 		}
