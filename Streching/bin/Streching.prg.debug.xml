@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<debugInfo>
+<pcToLineNum>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="3" lineNum="6" pc="268435456" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="3" lineNum="7" pc="268435460" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="3" lineNum="8" pc="268435478" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="4" lineNum="12" pc="268435525" symbol="onStart"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="5" lineNum="16" pc="268435530" symbol="onStop"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="6" lineNum="20" pc="268435535" symbol="getInitialView"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingApp.mc" id="6" lineNum="21" pc="268435539" symbol="getInitialView"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="8" lineNum="13" pc="268435607" symbol="start"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="8" lineNum="14" pc="268435611" symbol="start"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="8" lineNum="17" pc="268435688" symbol="start"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="9" lineNum="20" pc="268435707" symbol="stop"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="9" lineNum="21" pc="268435711" symbol="stop"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="9" lineNum="22" pc="268435729" symbol="stop"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="9" lineNum="23" pc="268435747" symbol="stop"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="10" lineNum="26" pc="268435757" symbol="isRecording"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="10" lineNum="27" pc="268435761" symbol="isRecording"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="10" lineNum="28" pc="268435774" symbol="isRecording"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="10" lineNum="30" pc="268435795" symbol="isRecording"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="11" lineNum="34" pc="268435799" symbol="lap"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="11" lineNum="35" pc="268435803" symbol="lap"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\ActivityControl.mc" id="12" lineNum="38" pc="268435822" symbol="discard"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="14" lineNum="6" pc="268435830" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="14" lineNum="7" pc="268435834" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="15" lineNum="10" pc="268435853" symbol="onMenuItem"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="15" lineNum="11" pc="268435857" symbol="onMenuItem"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="15" lineNum="12" pc="268435868" symbol="onMenuItem"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="15" lineNum="13" pc="268435892" symbol="onMenuItem"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingMenuDelegate.mc" id="15" lineNum="14" pc="268435903" symbol="onMenuItem"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="11" pc="268435928" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="12" pc="268435940" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="13" pc="268435956" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="14" pc="268435975" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="15" pc="268435992" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="16" pc="268436010" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="24" pc="268436238" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="25" pc="268436266" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="33" pc="268436494" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="16" lineNum="34" pc="268436512" symbol="onRefreshTimer"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="18" lineNum="40" pc="268436534" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="18" lineNum="41" pc="268436538" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="44" pc="268436557" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="47" pc="268436561" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="48" pc="268436582" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="49" pc="268436600" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="51" pc="268436647" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="52" pc="268436665" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="54" pc="268436683" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="19" lineNum="55" pc="268436695" symbol="onSelect"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="58" pc="268436699" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="59" pc="268436703" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="60" pc="268436723" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="61" pc="268436741" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="62" pc="268436754" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="64" pc="268436801" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="66" pc="268436804" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="20" lineNum="67" pc="268436816" symbol="onBack"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="21" lineNum="70" pc="268436820" symbol="refreshView"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="21" lineNum="71" pc="268436824" symbol="refreshView"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="23" lineNum="81" pc="268436841" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="23" lineNum="82" pc="268436845" symbol="initialize"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="24" lineNum="86" pc="268436864" symbol="onLayout"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="25" lineNum="93" pc="268436869" symbol="onShow"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="97" pc="268436874" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="98" pc="268436878" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="99" pc="268436918" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="102" pc="268436930" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="103" pc="268436949" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="105" pc="268436994" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="107" pc="268437034" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="108" pc="268437034" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="109" pc="268437054" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="111" pc="268437067" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="113" pc="268437077" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="115" pc="268437123" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="116" pc="268437148" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="117" pc="268437178" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="119" pc="268437224" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="26" lineNum="120" pc="268437254" symbol="onUpdate"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="27" lineNum="126" pc="268437307" symbol="onHide"/>
+<entry filename="C:\\Users\\Adam\\eclipse-workspace\\Streching\\source\\StrechingView.mc" id="27" lineNum="127" pc="268437311" symbol="onHide"/>
+<entry filename="Rez" id="33" lineNum="16" pc="268437330" symbol="MainLayout"/>
+<entry filename="Rez" id="33" lineNum="18" pc="268437342" symbol="MainLayout"/>
+<entry filename="Rez" id="33" lineNum="19" pc="268437494" symbol="MainLayout"/>
+<entry filename="Rez" id="33" lineNum="20" pc="268437606" symbol="MainLayout"/>
+<entry filename="Rez" id="33" lineNum="22" pc="268437646" symbol="MainLayout"/>
+<entry filename="Rez" id="36" lineNum="35" pc="268437674" symbol="initialize"/>
+<entry filename="Rez" id="36" lineNum="36" pc="268437678" symbol="initialize"/>
+<entry filename="Rez" id="36" lineNum="37" pc="268437696" symbol="initialize"/>
+<entry filename="Rez" id="36" lineNum="38" pc="268437752" symbol="initialize"/>
+</pcToLineNum>
+<symbolTable>
+<entry id="8388698" method="true" symbol="start"/>
+<entry id="8388644" module="true" symbol="System"/>
+<entry id="17" object="true" symbol="StrechingDelegate"/>
+<entry id="8389124" method="true" symbol="onUpdate"/>
+<entry id="8389349" symbol="justification"/>
+<entry id="19" method="true" symbol="refreshView"/>
+<entry id="8388881" method="true" symbol="isRecording"/>
+<entry id="8388883" method="true" symbol="discard"/>
+<entry field="true" id="35" symbol="RECORDING"/>
+<entry field="true" id="13" symbol="activityControl"/>
+<entry field="true" id="8388611" module="true" symbol="Toybox"/>
+<entry id="24" object="true" symbol="MainMenu"/>
+<entry id="8389619" method="true" symbol="onSelect"/>
+<entry id="8388770" module="true" object="true" symbol="Strings"/>
+<entry id="34" method="true" symbol="lap"/>
+<entry id="8389280" method="true" symbol="getInitialView"/>
+<entry id="8388639" module="true" symbol="Graphics"/>
+<entry field="true" id="30" symbol="ACTIVITY_NAME"/>
+<entry id="25" method="true" symbol="MainLayout"/>
+<entry id="8388769" module="true" object="true" symbol="Rez"/>
+<entry field="true" id="14" symbol="refreshTimer"/>
+<entry id="8389123" method="true" symbol="onShow"/>
+<entry id="8388638" module="true" symbol="ActivityRecording"/>
+<entry id="8388636" module="true" symbol="Attention"/>
+<entry id="8388702" method="true" symbol="initialize"/>
+<entry field="true" id="29" symbol="AppName"/>
+<entry id="9" object="true" symbol="StrechingApp"/>
+<entry id="8388890" symbol="sport"/>
+<entry id="16" method="true" symbol="onRefreshTimer"/>
+<entry field="true" id="8388892" symbol="name"/>
+<entry id="38" symbol="item_2"/>
+<entry id="37" symbol="item_1"/>
+<entry field="true" id="23" symbol="LauncherIcon"/>
+<entry id="8388646" module="true" object="true" symbol="Timer"/>
+<entry field="true" id="27" symbol="menu_label_2"/>
+<entry id="8389081" method="true" symbol="onBack"/>
+<entry field="true" id="26" symbol="menu_label_1"/>
+<entry id="8388648" module="true" symbol="WatchUi"/>
+<entry id="8389281" method="true" symbol="onStop"/>
+<entry field="true" id="8389065" symbol="locY"/>
+<entry field="true" id="8389064" symbol="locX"/>
+<entry id="8388771" module="true" object="true" symbol="Drawables"/>
+<entry id="8388891" symbol="subSport"/>
+<entry id="8389122" method="true" symbol="onLayout"/>
+<entry field="true" id="32" symbol="ACTIVITY_SUB_SPORT"/>
+<entry id="8389279" method="true" symbol="onStart"/>
+<entry field="true" id="22" symbol="id_monkey"/>
+<entry id="8389348" symbol="font"/>
+<entry id="8389347" symbol="color"/>
+<entry field="true" id="36" symbol="NOT_RECORDING"/>
+<entry field="true" id="33" symbol="session"/>
+<entry id="8389109" method="true" symbol="onMenuItem"/>
+<entry id="11" object="true" symbol="StrechingMenuDelegate"/>
+<entry id="20" module="true" symbol="Layouts"/>
+<entry field="true" id="28" symbol="prompt"/>
+<entry id="8389125" method="true" symbol="onHide"/>
+<entry id="18" object="true" symbol="StrechingView"/>
+<entry id="10" object="true" symbol="ActivityControl"/>
+<entry field="true" id="12" symbol="REFRESH_PERIOD"/>
+<entry id="8389345" symbol="rezId"/>
+<entry id="8390088" module="true" object="true" symbol="JsonData"/>
+<entry id="8389346" symbol="text"/>
+<entry field="true" id="8389063" symbol="identifier"/>
+<entry id="21" module="true" symbol="Menus"/>
+<entry field="true" id="15" symbol="timerCount"/>
+<entry field="true" id="31" symbol="ACTIVITY_SPORT"/>
+<entry id="8388699" method="true" symbol="stop"/>
+<entry id="8388772" module="true" object="true" symbol="Fonts"/>
+<entry id="8388635" module="true" symbol="Application"/>
+</symbolTable>
+<localVars>
+<entry endPc="268435530" name="state" stackId="1" startPc="268435525"/>
+<entry endPc="268435535" name="state" stackId="1" startPc="268435530"/>
+<entry endPc="268435928" name="item" stackId="1" startPc="268435853"/>
+<entry endPc="268436530" name="toneProfile" stackId="1" startPc="268435992"/>
+<entry endPc="268436530" name="vibeData" stackId="2" startPc="268435992"/>
+<entry endPc="268436869" name="dc" stackId="1" startPc="268436864"/>
+<entry endPc="268437306" name="x" stackId="2" startPc="268436878"/>
+<entry endPc="268437306" name="isRecordingText" stackId="4" startPc="268436878"/>
+<entry endPc="268437306" name="heartRate" stackId="5" startPc="268436878"/>
+<entry endPc="268437306" name="y" stackId="3" startPc="268436878"/>
+<entry endPc="268437307" name="dc" stackId="1" startPc="268436874"/>
+<entry endPc="268437673" name="rez_cmp_local_text_8475995851" stackId="2" startPc="268437342"/>
+<entry endPc="268437673" name="rez_cmp_local_bitmap_id_monkey" stackId="3" startPc="268437342"/>
+<entry endPc="268437674" name="dc" stackId="1" startPc="268437330"/>
+</localVars>
+<annotations/>
+<dataEntryOffsetMappings>
+<dataEntry offset="87" parentId="" symbolId="globals" type="module"/>
+<dataEntry offset="246" parentId="globals" symbolId="StrechingDelegate" type="class"/>
+<dataEntry offset="317" parentId="globals" symbolId="StrechingMenuDelegate" type="class"/>
+<dataEntry offset="372" parentId="globals" symbolId="Rez" type="module"/>
+<dataEntry offset="451" parentId="Rez" symbolId="Drawables" type="module"/>
+<dataEntry offset="498" parentId="Rez" symbolId="Menus" type="module"/>
+<dataEntry offset="537" parentId="Menus" symbolId="MainMenu" type="class"/>
+<dataEntry offset="584" parentId="Rez" symbolId="Fonts" type="module"/>
+<dataEntry offset="615" parentId="Rez" symbolId="Layouts" type="module"/>
+<dataEntry offset="654" parentId="Rez" symbolId="JsonData" type="module"/>
+<dataEntry offset="685" parentId="Rez" symbolId="Strings" type="module"/>
+<dataEntry offset="748" parentId="globals" symbolId="ActivityControl" type="class"/>
+<dataEntry offset="867" parentId="globals" symbolId="StrechingView" type="class"/>
+<dataEntry offset="962" parentId="globals" symbolId="StrechingApp" type="class"/>
+</dataEntryOffsetMappings>
+<functions>
+<functionEntry accessMode="public" name="initialize" parent="StrechingApp">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onStart" parent="StrechingApp">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onStop" parent="StrechingApp">
+<param id="state"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="getInitialView" parent="StrechingApp">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="start" parent="ActivityControl">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="stop" parent="ActivityControl">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="isRecording" parent="ActivityControl">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="lap" parent="ActivityControl">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="discard" parent="ActivityControl">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="initialize" parent="StrechingMenuDelegate">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onMenuItem" parent="StrechingMenuDelegate">
+<param id="item"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onRefreshTimer">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="initialize" parent="StrechingDelegate">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onSelect" parent="StrechingDelegate">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onBack" parent="StrechingDelegate">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="refreshView" parent="StrechingDelegate">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="initialize" parent="StrechingView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onLayout" parent="StrechingView">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onShow" parent="StrechingView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onUpdate" parent="StrechingView">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="onHide" parent="StrechingView">
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="MainLayout" parent="Layouts">
+<param id="dc"/>
+<documentation/>
+</functionEntry>
+<functionEntry accessMode="public" name="initialize" parent="MainMenu">
+<documentation/>
+</functionEntry>
+</functions>
+</debugInfo>
