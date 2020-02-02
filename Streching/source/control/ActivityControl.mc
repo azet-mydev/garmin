@@ -2,12 +2,6 @@ using Toybox.ActivityRecording;
 
 class ActivityControl
 {
-
-	//Config
-	const ACTIVITY_NAME = "Stretching";
-	const ACTIVITY_SPORT = ActivityRecording.SPORT_FITNESS_EQUIPMENT;
-	const ACTIVITY_SUB_SPORT = ActivityRecording.SUB_SPORT_STRENGTH_TRAINING;
-	
 	var session = null;
 	
 	function start(){

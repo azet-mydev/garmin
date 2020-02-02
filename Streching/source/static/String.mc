@@ -1,0 +1,1 @@
+const ACTIVITY_NAME = "Stretching";

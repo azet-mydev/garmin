@@ -1,6 +1,12 @@
 using Toybox.Application;
 using Toybox.WatchUi;
 
+//Global variables
+
+//Control
+var stateMachine = new StateMachine();
+var activityControl = new ActivityControl();
+
 class StrechingApp extends Application.AppBase {
 
     function initialize() {
@@ -18,7 +24,8 @@ class StrechingApp extends Application.AppBase {
 
     // Return the initial view of your application here
     function getInitialView() {
-        return [ new StrechingView(), new StrechingDelegate() ];
+//        return [ new StrechingView(), new StrechingDelegate() ];
+        return [ new StartView(), new StartExerciseDelegate() ];
     }
 
 }
