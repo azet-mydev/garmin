@@ -1,6 +1,6 @@
  using Toybox.WatchUi;
  
- class ExerciseView extends WatchUi.View {
+ class SummaryView extends WatchUi.View {
  	
  	function initialize(){
  		View.initialize();
@@ -12,14 +12,10 @@
 		var x = dc.getWidth() / 2;
 		var y = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_MEDIUM);\
 		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-		dc.drawText(x, y, Graphics.FONT_MEDIUM, "ExerciseView", Graphics.TEXT_JUSTIFY_CENTER);
+		dc.drawText(x, y, Graphics.FONT_MEDIUM, "SummaryView", Graphics.TEXT_JUSTIFY_CENTER);
 		
 		var heartRate = Sensor.getInfo().heartRate;
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
-        
-        var counter = $.timerService.getCounter(TimerService.REP_TIME);
-        y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
-        dc.drawText(x, y, Graphics.FONT_MEDIUM, counter, Graphics.TEXT_JUSTIFY_CENTER);
  	}
  }

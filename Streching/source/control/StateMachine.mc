@@ -3,24 +3,32 @@
 //Views
 var initialView = new InitialView();
 var exerciseView = new ExerciseView();
+var restView = new RestView();
+var summaryView = new SummaryView(); 
 
 //Delegates
-var startExerciseDelegate = new StartExerciseDelegate();
-var startedExerciseDelegate = new StartedExerciseDelegate();
+var initialDelegate = new InitialDelegate();
+var exerciseDelegate = new ExerciseDelegate();
+var restDelegate = new RestDelegate();
+var summaryDelegate = new SummaryDelegate();
 
 class StateMachine {
 
 	enum {
 		INITIAL,
-		STARTED
+		EXERCISE,
+		REST,
+		SUMMARY
 	}
 	
 	enum {
-		START,
-		STOP
+		SELECT,
+		BACK,
+		EXERCISE_TIMEOUT
 	}
 	
 	var currentState = INITIAL;
+	var previousState = null;
 	
 	function transition(action){
 		switch(currentState) {
@@ -28,8 +36,16 @@ class StateMachine {
 				initial(action);
 				break;
 			}
-			case STARTED: {
-				started(action);
+			case EXERCISE: {
+				exercise(action);
+				break;
+			}
+			case REST: {
+				resting(action);
+				break;
+			}
+			case SUMMARY: {
+				summary(action);
 				break;
 			}
 		}
@@ -37,27 +53,67 @@ class StateMachine {
 	
 	private function initial(action){
 		switch(action) {
-			case START: {
-				WatchUi.switchToView(exerciseView, startedExerciseDelegate, WatchUi.SLIDE_IMMEDIATE);
-				currentState=STARTED;
-				break;
-			}
-			case STOP: {
-				
+			case SELECT: {
+				moveState(EXERCISE);
 				break;
 			}
 		}
 	}
 	
-	private function started(action){
+	private function exercise(action){
 		switch(action) {
-			case START: {
-				
+			case SELECT: {
+				moveState(SUMMARY);
 				break;
 			}
-			case STOP: {
-				WatchUi.switchToView(initialView, startExerciseDelegate, WatchUi.SLIDE_IMMEDIATE);
-				currentState=INITIAL;
+			case EXERCISE_TIMEOUT: {
+				moveState(REST);
+				break;	
+			}
+		}
+	}
+	
+	private function resting(action){
+		switch(action) {
+			case BACK: {
+				moveState(EXERCISE);
+				break;
+			}
+			case SELECT: {
+				moveState(SUMMARY);
+				break;
+			}
+		}
+	}
+	
+	private function summary(action){
+		switch(action) {
+			case SELECT: {
+				moveState(previousState);
+				break;
+			}
+		}
+	}
+	
+	private function moveState(newState){
+		previousState = currentState;
+		currentState = newState;
+		
+		switch(newState) {
+			case INITIAL: {
+				WatchUi.switchToView(initialView, initialDelegate, SCREEN_TRANSITION);
+				break;
+			}
+			case EXERCISE: {
+				WatchUi.switchToView(exerciseView, exerciseDelegate, SCREEN_TRANSITION);
+				break;
+			}
+			case REST: {
+				WatchUi.switchToView(restView, restDelegate, SCREEN_TRANSITION);
+				break;
+			}
+			case SUMMARY: {
+				WatchUi.switchToView(summaryView, summaryDelegate, SCREEN_TRANSITION);
 				break;
 			}
 		}

@@ -17,6 +17,14 @@ class ActivityControl
 		session = null;
 	}
 	
+	function pause(){
+		session.stop();
+	}
+	
+	function resume(){
+		session.start();
+	}
+	
 	function isRecording(){
 		if(session != null){
 			return session.isRecording();
@@ -30,7 +38,8 @@ class ActivityControl
 	}
 	
 	function discard(){
-		//TODO: to be implemented
+		session.discard();
+		session = null;
 	}
 	
 }

@@ -4,8 +4,8 @@ class TimerService{
 	
 	enum {
 		REFRESH_VIEW,
-		REP_TIMEOUT,
-		REP_BREAK
+		REP_TIME,
+		REP_PAUSE_TIME
 	}
 
 	private var periods = {};
@@ -25,6 +25,14 @@ class TimerService{
 		counters = {};
 		callbacks = {};
 		timers = {};
+	}
+	
+	function pause(){
+		timer.stop();
+	}
+	
+	function resume(){
+		start();
 	}
 	
 	function registerCallback(timerName, period, callback, repeat){

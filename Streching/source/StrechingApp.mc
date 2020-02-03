@@ -23,12 +23,13 @@ class StrechingApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
+    	$.timerService.stop();
     }
 
     // Return the initial view of your application here
     function getInitialView() {
 //        return [ new StrechingView(), new StrechingDelegate() ];
-        return [ new InitialView(), new StartExerciseDelegate() ];
+        return [initialView, initialDelegate];
     }
 }
 
