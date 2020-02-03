@@ -1,18 +1,7 @@
 //TODO: Should be moved to class level and be private (circular dependency issue)
 
-//Views
-var initialView = new InitialView();
-var exerciseView = new ExerciseView();
-var restView = new RestView();
-var summaryView = new SummaryView(); 
 
-//Delegates
-var initialDelegate = new InitialDelegate();
-var exerciseDelegate = new ExerciseDelegate();
-var restDelegate = new RestDelegate();
-var summaryDelegate = new SummaryDelegate();
-
-class StateMachine {
+class SmSrvc {
 
 	enum {
 		INITIAL,
@@ -27,8 +16,20 @@ class StateMachine {
 		EXERCISE_TIMEOUT
 	}
 	
-	var currentState = INITIAL;
-	var previousState = null;
+	//Views
+	private var initialView = new InitialView();
+	private var exerciseView = new ExerciseView();
+	private var restView = new RestView();
+	private var summaryView = new SummaryView(); 
+
+	//Delegates
+	private var initialDelegate = new InitialDelegate();
+	private var exerciseDelegate = new ExerciseDelegate();
+	private var restDelegate = new RestDelegate();
+	private var summaryDelegate = new SummaryDelegate();
+	
+	private var currentState = INITIAL;
+	private var previousState = null;
 	
 	function transition(action){
 		switch(currentState) {
@@ -49,6 +50,10 @@ class StateMachine {
 				break;
 			}
 		}
+	}
+	
+	function getInit() {
+		return [initialView, initialDelegate];
 	}
 	
 	private function initial(action){

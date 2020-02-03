@@ -1,8 +1,8 @@
- using Toybox.WatchUi;
- 
- class ExerciseView extends WatchUi.View {
+using Toybox.WatchUi;
+
+class ExerciseView extends WatchUi.View {
  	
- 	function initialize(){
+	function initialize(){
  		View.initialize();
  	}
  	
@@ -18,8 +18,8 @@
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
         
-        var counter = $.timerService.getCounter(TimerService.REP_TIME);
+        var counter = $.s.get(S.TIMER).getCounter(TimerSrvc.REP_TIME);
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, counter, Graphics.TEXT_JUSTIFY_CENTER);
  	}
- }
+}

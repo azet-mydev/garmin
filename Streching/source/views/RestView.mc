@@ -18,7 +18,7 @@
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
         
-       	var timer = $.timerService.getTimer(TimerService.REP_PAUSE_TIME);
+       	var timer = $.s.get(S.TIMER).getTimer(TimerSrvc.REP_PAUSE_TIME);
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, timer, Graphics.TEXT_JUSTIFY_CENTER);
  	}

@@ -1,6 +1,6 @@
 using Toybox.Timer;
 
-class TimerService{
+class TimerSrvc {
 	
 	enum {
 		REFRESH_VIEW,
@@ -15,11 +15,11 @@ class TimerService{
 	
 	var timer = new Timer.Timer();
 
-	function start(){
+	function start() {
 		timer.start(method(:timeOut), TIMER_PERIOD, true);
 	}
 	
-	function stop(){
+	function stop() {
 		timer.stop();
 		periods = {};
 		counters = {};
@@ -27,11 +27,11 @@ class TimerService{
 		timers = {};
 	}
 	
-	function pause(){
+	function pause() {
 		timer.stop();
 	}
 	
-	function resume(){
+	function resume() {
 		start();
 	}
 	
