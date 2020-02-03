@@ -18,8 +18,11 @@
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
         dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
         
-        var counter = $.timerService.getCounter("EXERCISE");
+        var timer = $.timerService.getCounter(TimerService.REP_TIMEOUT);
+        if(timer==null){
+       		timer = $.timerService.getTimer(TimerService.REP_BREAK);
+       	}
         y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
-        dc.drawText(x, y, Graphics.FONT_MEDIUM, counter, Graphics.TEXT_JUSTIFY_CENTER);
+        dc.drawText(x, y, Graphics.FONT_MEDIUM, timer, Graphics.TEXT_JUSTIFY_CENTER);
  	}
  }

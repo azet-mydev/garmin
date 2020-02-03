@@ -14,7 +14,7 @@ class StrechingApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
-    	Sensor.enableSensorEvents(method(:refreshView));
+//    	Sensor.enableSensorEvents(method(:refreshView));
     }
 
     // onStart() is called on application start up
@@ -32,6 +32,6 @@ class StrechingApp extends Application.AppBase {
     }
 }
 
-function refreshView(sensorInfo) {
-	WatchUi.requestUpdate();
-}
+//function refreshView(sensorInfo) {
+//	WatchUi.requestUpdate();
+//}
