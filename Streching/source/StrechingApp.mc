@@ -14,7 +14,6 @@ class StrechingApp extends Application.AppBase {
     function initialize() {
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
-//    	Sensor.enableSensorEvents(method(:refreshView));
     }
 
     // onStart() is called on application start up
@@ -23,16 +22,10 @@ class StrechingApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
-    	$.timerService.stop();
     }
 
     // Return the initial view of your application here
     function getInitialView() {
-//        return [ new StrechingView(), new StrechingDelegate() ];
         return [initialView, initialDelegate];
     }
 }
-
-//function refreshView(sensorInfo) {
-//	WatchUi.requestUpdate();
-//}
