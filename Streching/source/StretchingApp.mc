@@ -5,7 +5,7 @@ using Toybox.Sensor;
 //Global variables
 var s;
 
-class StrechingApp extends Application.AppBase {
+class StretchingApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();

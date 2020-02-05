@@ -1,7 +1,7 @@
 //using Toybox.WatchUi;
 //using Toybox.System;
 //
-//class StrechingMenuDelegate extends WatchUi.MenuInputDelegate {
+//class StretchingMenuDelegate extends WatchUi.MenuInputDelegate {
 //
 //    function initialize() {
 //        MenuInputDelegate.initialize();
