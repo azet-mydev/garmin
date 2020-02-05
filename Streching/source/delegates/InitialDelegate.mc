@@ -9,8 +9,16 @@ class InitialDelegate extends CommonDelegate{
     function onSelect() {
         $.s.get(S.ACTIVITY).start();
         $.s.get(S.TIMER).start();
-        $.s.get(S.TIMER).registerCallback(TimerSrvc.REFRESH_VIEW, REFRESH_PERIOD, method(:refreshView_callback), true);
-        $.s.get(S.TIMER).registerCallback(TimerSrvc.REP_TIME, REP_PERIOD, method(:repTime_callback), false);
+        $.s.get(S.TIMER).add(TimerSrvc.REFRESH_VIEW, {
+        												:period=>REFRESH_PERIOD,
+														:callback=>method(:refreshView_callback), 
+														:repeat=>true
+													 });
+        $.s.get(S.TIMER).add(TimerSrvc.REP_TIME, {
+        											:period=>REP_PERIOD,
+													:callback=>method(:repTime_callback), 
+													:repeat=>false
+												 });
         $.s.get(S.SM).transition(SmSrvc.SELECT);
         $.s.get(S.NOTIFY).signal(NotifySrvc.START);
         return true;

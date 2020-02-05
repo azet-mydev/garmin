@@ -13,10 +13,7 @@ class ExerciseView extends WatchUi.View {
  	    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
     	dc.clear();
     	
-    	var counter = $.s.get(S.TIMER).getCounter(TimerSrvc.REP_TIME);
-        if(counter==null){
-        	counter = 0;
-        }
+    	var counter = $.s.get(S.TIMER).getRemainingTime(TimerSrvc.REP_TIME);
     	
     	dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_BLACK);    	
     	dc.setPenWidth(dc.getWidth()/20);

@@ -20,10 +20,7 @@ class RestView extends WatchUi.View {
         var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
         dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
         
-        var counter = $.s.get(S.TIMER).getTimer(TimerSrvc.REP_PAUSE_TIME);
-        if(counter==null){
-        	counter = 0;
-        }
+        var counter = $.s.get(S.TIMER).getElapsedTime(TimerSrvc.REP_PAUSE_TIME);
         var minutes = counter/60.toNumber();
         var seconds = counter % 60;  
         var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   

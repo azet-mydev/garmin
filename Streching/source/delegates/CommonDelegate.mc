@@ -15,13 +15,17 @@ class CommonDelegate extends WatchUi.BehaviorDelegate {
 	
 	function lapAction() {
 		$.s.get(S.ACTIVITY).lap();
-    	$.s.get(S.TIMER).registerCallback(TimerSrvc.REP_TIME, REP_PERIOD, method(:repTime_callback), false);
+		$.s.get(S.TIMER).add(TimerSrvc.REP_TIME,{
+													:period=>REP_PERIOD,
+													:callback=>method(:repTime_callback), 
+													:repeat=>false
+												});
 		$.s.get(S.SM).transition(SmSrvc.BACK);
 		$.s.get(S.NOTIFY).signal(NotifySrvc.LAP);
 	}
 	
 	function repTime_callback() {
-		$.s.get(S.TIMER).registerTimer(TimerSrvc.REP_PAUSE_TIME);
+		$.s.get(S.TIMER).add(TimerSrvc.REP_PAUSE_TIME, {});
 		$.s.get(S.SM).transition(SmSrvc.EXERCISE_TIMEOUT);
 		$.s.get(S.NOTIFY).signal(NotifySrvc.TIMEOUT);
 	}
