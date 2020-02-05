@@ -1,4 +1,6 @@
 using Toybox.WatchUi;
+using Toybox.Time;
+using Toybox.Time.Gregorian;
 
 class ExerciseView extends WatchUi.View {
  	
@@ -8,18 +10,28 @@ class ExerciseView extends WatchUi.View {
  	
  	function onUpdate(dc){
  	    dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
-    	dc.clear(); 
-		var x = dc.getWidth() / 2;
-		var y = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_MEDIUM);\
-		dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-		dc.drawText(x, y, Graphics.FONT_MEDIUM, "ExerciseView", Graphics.TEXT_JUSTIFY_CENTER);
+    	dc.clear();
+    	dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
+    	 
+		var posX = dc.getWidth() / 2;
 		
-		var heartRate = Sensor.getInfo().heartRate;
-        y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
-        dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
+		var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+		var time = Lang.format("$1$:$2$", [today.hour,today.min.format("%02d")]);
+        var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
+        dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
         
         var counter = $.s.get(S.TIMER).getCounter(TimerSrvc.REP_TIME);
-        y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
-        dc.drawText(x, y, Graphics.FONT_MEDIUM, counter, Graphics.TEXT_JUSTIFY_CENTER);
+        if(counter==null){
+        	counter = 0;
+        }
+        var minutes = counter/60.toNumber();
+        var seconds = counter % 60;  
+        var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   
+		var counterPosY = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_NUMBER_THAI_HOT)/2;   
+        dc.drawText(posX, counterPosY, Graphics.FONT_NUMBER_THAI_HOT, myTime, Graphics.TEXT_JUSTIFY_CENTER);  
+        
+        var heartRate = Sensor.getInfo().heartRate;
+        var hrPosY = dc.getHeight() - dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
+        dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
  	}
 }
