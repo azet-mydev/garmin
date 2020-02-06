@@ -1,32 +1,34 @@
 using Toybox.Attention;
 
-class NotifySrvc{
-
+class NOTIFY {
 	enum {
 		START, 
 		STOP,
 		LAP, 
 		TIMEOUT
 	}
+}
+
+class NotifyService{
 
 	function signal(action){
 		switch(action) {
-			case START: {
+			case NOTIFY.START: {
 				start();
 				vibrate();
 				break;
 			}
-			case STOP: {
+			case NOTIFY.STOP: {
 				stop();
 				vibrate();
 				break;
 			}
-			case LAP: {
+			case NOTIFY.LAP: {
 				lap();
 				vibrate();
 				break;
 			}
-			case TIMEOUT: {
+			case NOTIFY.TIMEOUT: {
 				timeout();
 				vibrate();
 				break;

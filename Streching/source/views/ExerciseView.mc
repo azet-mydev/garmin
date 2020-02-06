@@ -13,7 +13,7 @@ class ExerciseView extends WatchUi.View {
  	    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
     	dc.clear();
     	
-    	var timer = S_TIMER.getRemainingTime(TimerSrvc.REP_TIME);
+    	var timer = S_TIMER.getRemainingTime(TIMER.REP_TIME);
     	
     	dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_BLACK);    	
     	dc.setPenWidth(dc.getWidth()/20);
@@ -42,13 +42,13 @@ class ExerciseView extends WatchUi.View {
  	}
  	
  	function onShow(){
- 	    S_TIMER.schedule(TimerSrvc.REFRESH_VIEW, {
+ 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
         												:period=>REFRESH_PERIOD,
 														:callback=>method(:refreshView_callback), 
 														:repeat=>true
 													 });
-		if(!S_TIMER.resume(TimerSrvc.REP_TIME)){											 
-	        S_TIMER.schedule(TimerSrvc.REP_TIME, {
+		if(!S_TIMER.resume(TIMER.REP_TIME)){											 
+	        S_TIMER.schedule(TIMER.REP_TIME, {
 	        											:period=>REP_PERIOD,
 														:callback=>method(:repTime_callback), 
 														:repeat=>false
@@ -57,12 +57,12 @@ class ExerciseView extends WatchUi.View {
  	}
  	
  	function onHide(){
- 		S_TIMER.remove(TimerSrvc.REFRESH_VIEW);
+ 		S_TIMER.remove(TIMER.REFRESH_VIEW);
  	}
  	
  	function repTime_callback() {
-		S_SM.transition(SmSrvc.EXERCISE_TIMEOUT);
-		S_NOTIFY.signal(NotifySrvc.TIMEOUT);
+		S_SM.transition(SM.EXERCISE_TIMEOUT);
+		S_NOTIFY.signal(NOTIFY.TIMEOUT);
 	}
 	
 	function refreshView_callback() {

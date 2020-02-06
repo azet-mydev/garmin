@@ -1,7 +1,4 @@
-//TODO: Should be moved to class level and be private (circular dependency issue)
-
-
-class SmSrvc {
+class SM {
 
 	enum {
 		INITIAL,
@@ -15,6 +12,9 @@ class SmSrvc {
 		BACK,
 		EXERCISE_TIMEOUT
 	}
+}
+
+class StateMachineService {
 	
 	//Views
 	private var initialView;
@@ -36,7 +36,8 @@ class SmSrvc {
 					_initialDelegate,
 					_exerciseDelegate,
 					_restDelegate,
-					_summaryDelegate
+					_summaryDelegate,
+					_currentState
 					){
 		initialView = _initialView;
 		exerciseView = _exerciseView;
@@ -46,26 +47,28 @@ class SmSrvc {
 		exerciseDelegate = _exerciseDelegate;
 		restDelegate = _restDelegate;
 		summaryDelegate = _summaryDelegate;
+		
+		currentState = _currentState;
 	}
 	
-	private var currentState = INITIAL;
-	private var previousState = null;
+	private var currentState;
+	private var previousState;
 	
 	function transition(action){
 		switch(currentState) {
-			case INITIAL: {
+			case SM.INITIAL: {
 				initial(action);
 				break;
 			}
-			case EXERCISE: {
+			case SM.EXERCISE: {
 				exercise(action);
 				break;
 			}
-			case REST: {
+			case SM.REST: {
 				resting(action);
 				break;
 			}
-			case SUMMARY: {
+			case SM.SUMMARY: {
 				summary(action);
 				break;
 			}
@@ -78,8 +81,8 @@ class SmSrvc {
 	
 	private function initial(action){
 		switch(action) {
-			case SELECT: {
-				moveState(EXERCISE);
+			case SM.SELECT: {
+				moveState(SM.EXERCISE);
 				break;
 			}
 		}
@@ -87,12 +90,12 @@ class SmSrvc {
 	
 	private function exercise(action){
 		switch(action) {
-			case SELECT: {
-				moveState(SUMMARY);
+			case SM.SELECT: {
+				moveState(SM.SUMMARY);
 				break;
 			}
-			case EXERCISE_TIMEOUT: {
-				moveState(REST);
+			case SM.EXERCISE_TIMEOUT: {
+				moveState(SM.REST);
 				break;	
 			}
 		}
@@ -100,12 +103,12 @@ class SmSrvc {
 	
 	private function resting(action){
 		switch(action) {
-			case BACK: {
-				moveState(EXERCISE);
+			case SM.BACK: {
+				moveState(SM.EXERCISE);
 				break;
 			}
-			case SELECT: {
-				moveState(SUMMARY);
+			case SM.SELECT: {
+				moveState(SM.SUMMARY);
 				break;
 			}
 		}
@@ -113,7 +116,7 @@ class SmSrvc {
 	
 	private function summary(action){
 		switch(action) {
-			case SELECT: {
+			case SM.SELECT: {
 				moveState(previousState);
 				break;
 			}
@@ -125,19 +128,19 @@ class SmSrvc {
 		currentState = newState;
 		
 		switch(newState) {
-			case INITIAL: {
+			case SM.INITIAL: {
 				WatchUi.switchToView(initialView, initialDelegate, SCREEN_TRANSITION);
 				break;
 			}
-			case EXERCISE: {
+			case SM.EXERCISE: {
 				WatchUi.switchToView(exerciseView, exerciseDelegate, SCREEN_TRANSITION);
 				break;
 			}
-			case REST: {
+			case SM.REST: {
 				WatchUi.switchToView(restView, restDelegate, SCREEN_TRANSITION);
 				break;
 			}
-			case SUMMARY: {
+			case SM.SUMMARY: {
 				WatchUi.switchToView(summaryView, summaryDelegate, SCREEN_TRANSITION);
 				break;
 			}

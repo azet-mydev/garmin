@@ -16,7 +16,8 @@ class StretchingApp extends Application.AppBase {
 			new InitialDelegate(),
 			new ExerciseDelegate(),
 			new RestDelegate(),
-			new SummaryDelegate()
+			new SummaryDelegate(),
+			SM.INITIAL
 		);
     }
 

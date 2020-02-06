@@ -20,7 +20,7 @@ class RestView extends WatchUi.View {
         var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
         dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
         
-        var timer = S_TIMER.getElapsedTime(TimerSrvc.REP_PAUSE_TIME);
+        var timer = S_TIMER.getElapsedTime(TIMER.REP_PAUSE_TIME);
         var minutes = timer/60.toNumber();
         var seconds = timer % 60;  
         var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   
@@ -35,18 +35,18 @@ class RestView extends WatchUi.View {
  	}
  	
  	function onShow(){
- 	    S_TIMER.schedule(TimerSrvc.REFRESH_VIEW, {
+ 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
         												:period=>REFRESH_PERIOD,
 														:callback=>method(:refreshView_callback), 
 														:repeat=>true
 														});
-		if(!S_TIMER.resume(TimerSrvc.REP_PAUSE_TIME)){											 
-			S_TIMER.schedule(TimerSrvc.REP_PAUSE_TIME, {});
+		if(!S_TIMER.resume(TIMER.REP_PAUSE_TIME)){											 
+			S_TIMER.schedule(TIMER.REP_PAUSE_TIME, {});
 		}								
  	}
  	
  	function onHide(){
- 		S_TIMER.remove(TimerSrvc.REFRESH_VIEW);
+ 		S_TIMER.remove(TIMER.REFRESH_VIEW);
  	}
  	
  	function refreshView_callback() {

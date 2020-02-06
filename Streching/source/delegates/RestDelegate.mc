@@ -8,17 +8,17 @@ class RestDelegate extends WatchUi.BehaviorDelegate {
     
     function onSelect() {
 		S_ACTIVITY.pause();
-		S_TIMER.pause(TimerSrvc.REP_PAUSE_TIME);
-		S_NOTIFY.signal(NotifySrvc.STOP);
-        S_SM.transition(SmSrvc.SELECT);
+		S_TIMER.pause(TIMER.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NOTIFY.STOP);
+        S_SM.transition(SM.SELECT);
         return true;
     }
     
     function onBack() {
 		S_ACTIVITY.lap();
-		S_TIMER.remove(TimerSrvc.REP_PAUSE_TIME);
-		S_NOTIFY.signal(NotifySrvc.LAP);
-		S_SM.transition(SmSrvc.BACK);
+		S_TIMER.remove(TIMER.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NOTIFY.LAP);
+		S_SM.transition(SM.BACK);
 		return true;
     } 
 }

@@ -1,6 +1,6 @@
 using Toybox.ActivityRecording;
 
-class ActivitySrvc
+class ActivityService
 {
 	var session = null;
 	
