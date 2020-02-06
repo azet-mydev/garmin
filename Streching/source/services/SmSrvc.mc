@@ -17,16 +17,36 @@ class SmSrvc {
 	}
 	
 	//Views
-	private var initialView = new InitialView();
-	private var exerciseView = new ExerciseView();
-	private var restView = new RestView();
-	private var summaryView = new SummaryView(); 
+	private var initialView;
+	private var exerciseView;
+	private var restView;
+	private var summaryView; 
 
 	//Delegates
-	private var initialDelegate = new InitialDelegate();
-	private var exerciseDelegate = new ExerciseDelegate();
-	private var restDelegate = new RestDelegate();
-	private var summaryDelegate = new SummaryDelegate();
+	private var initialDelegate;
+	private var exerciseDelegate;
+	private var restDelegate;
+	private var summaryDelegate;
+	
+	function init(
+					_initialView,
+					_exerciseView,
+					_restView,
+					_summaryView,
+					_initialDelegate,
+					_exerciseDelegate,
+					_restDelegate,
+					_summaryDelegate
+					){
+		initialView = _initialView;
+		exerciseView = _exerciseView;
+		restView = _restView;
+		summaryView = _summaryView;
+		initialDelegate = _initialDelegate;
+		exerciseDelegate = _exerciseDelegate;
+		restDelegate = _restDelegate;
+		summaryDelegate = _summaryDelegate;
+	}
 	
 	private var currentState = INITIAL;
 	private var previousState = null;

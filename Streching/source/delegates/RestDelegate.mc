@@ -7,18 +7,18 @@ class RestDelegate extends WatchUi.BehaviorDelegate {
     }
     
     function onSelect() {
-		$.s.get(S.ACTIVITY).pause();
-		$.s.get(S.TIMER).pause(TimerSrvc.REP_PAUSE_TIME);
-		$.s.get(S.NOTIFY).signal(NotifySrvc.STOP);
-        $.s.get(S.SM).transition(SmSrvc.SELECT);
+		S_ACTIVITY.pause();
+		S_TIMER.pause(TimerSrvc.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NotifySrvc.STOP);
+        S_SM.transition(SmSrvc.SELECT);
         return true;
     }
     
     function onBack() {
-		$.s.get(S.ACTIVITY).lap();
-		$.s.get(S.TIMER).remove(TimerSrvc.REP_PAUSE_TIME);
-		$.s.get(S.NOTIFY).signal(NotifySrvc.LAP);
-		$.s.get(S.SM).transition(SmSrvc.BACK);
+		S_ACTIVITY.lap();
+		S_TIMER.remove(TimerSrvc.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NotifySrvc.LAP);
+		S_SM.transition(SmSrvc.BACK);
 		return true;
     } 
 }

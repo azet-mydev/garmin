@@ -7,9 +7,9 @@ class InitialDelegate extends WatchUi.BehaviorDelegate{
     }
     
     function onSelect() {
-        $.s.get(S.ACTIVITY).start();
-        $.s.get(S.SM).transition(SmSrvc.SELECT);
-        $.s.get(S.NOTIFY).signal(NotifySrvc.START);
+        S_ACTIVITY.start();
+        S_SM.transition(SmSrvc.SELECT);
+        S_NOTIFY.signal(NotifySrvc.START);
         return true;
     }
 }

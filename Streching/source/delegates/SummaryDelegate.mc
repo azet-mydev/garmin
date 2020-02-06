@@ -7,15 +7,14 @@ class SummaryDelegate extends WatchUi.BehaviorDelegate {
     }
     
     function onSelect(){
-    	$.s.get(S.ACTIVITY).resume();
-        $.s.get(S.SM).transition(SmSrvc.SELECT);
-        $.s.get(S.NOTIFY).signal(NotifySrvc.START);
+    	S_ACTIVITY.resume();
+        S_SM.transition(SmSrvc.SELECT);
+        S_NOTIFY.signal(NotifySrvc.START);
         return true;
     }
     
     function onBack(){
-    	$.s.get(S.ACTIVITY).stop();
-    	$.s.get(S.TIMER).shutdown();
+    	S_ACTIVITY.stop();
     	return false;
     }
 }

@@ -2,28 +2,22 @@ using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.Sensor;
 
-//Global variables
-var s;
-
 class StretchingApp extends Application.AppBase {
 
     function initialize() {
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
-		
-		// Initialize services
-		var activitySrvc = new ActivitySrvc();
-		var smSrvc = new SmSrvc();
-		var timerSrvc = new TimerSrvc();
-		var notifySrvc = new NotifySrvc();
-
-	    var services = {
-			S.ACTIVITY => activitySrvc,
-			S.SM => smSrvc,
-			S.TIMER => timerSrvc,
-			S.NOTIFY => notifySrvc
-		};
-        s = new S(services);
+        
+        S_SM.init(
+        	new InitialView(),
+			new ExerciseView(),
+			new RestView(),
+			new SummaryView(),
+			new InitialDelegate(),
+			new ExerciseDelegate(),
+			new RestDelegate(),
+			new SummaryDelegate()
+		);
     }
 
     // onStart() is called on application start up
@@ -32,10 +26,11 @@ class StretchingApp extends Application.AppBase {
 
     // onStop() is called when your application is exiting
     function onStop(state) {
+    	S_TIMER.shutdown();
     }
 
     // Return the initial view of your application here
     function getInitialView() {
-        return $.s.get(S.SM).getInit();
+        return S_SM.getInit();
     }
 }

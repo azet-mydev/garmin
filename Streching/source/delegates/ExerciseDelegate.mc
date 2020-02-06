@@ -7,16 +7,16 @@ class ExerciseDelegate extends WatchUi.BehaviorDelegate {
     }
     
     function onSelect(){
-		$.s.get(S.ACTIVITY).pause();
-		$.s.get(S.TIMER).pause(TimerSrvc.REP_TIME);
-		$.s.get(S.NOTIFY).signal(NotifySrvc.STOP);
-        $.s.get(S.SM).transition(SmSrvc.SELECT);
+		S_ACTIVITY.pause();
+		S_TIMER.pause(TimerSrvc.REP_TIME);
+		S_NOTIFY.signal(NotifySrvc.STOP);
+        S_SM.transition(SmSrvc.SELECT);
         return true;
     }
     
     function onBack(){
-        $.s.get(S.TIMER).reset(TimerSrvc.REP_TIME);
-		$.s.get(S.NOTIFY).signal(NotifySrvc.LAP);
+        S_TIMER.reset(TimerSrvc.REP_TIME);
+		S_NOTIFY.signal(NotifySrvc.LAP);
 		return true;
     }
 }
