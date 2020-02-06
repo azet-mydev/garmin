@@ -16,21 +16,25 @@ class NotifyService{
 			case NOTIFY.START: {
 				start();
 				vibrate();
+				blink();
 				break;
 			}
 			case NOTIFY.STOP: {
 				stop();
 				vibrate();
+				blink();
 				break;
 			}
 			case NOTIFY.LAP: {
 				lap();
 				vibrate();
+				blink();
 				break;
 			}
 			case NOTIFY.TIMEOUT: {
 				timeout();
 				vibrate();
+				blink();
 				break;
 			}
 		}	
@@ -64,5 +68,17 @@ class NotifyService{
 	
 	private function timeout(){
 		Attention.playTone(Attention.TONE_LOUD_BEEP);
+	}
+	
+	private function blink(){
+		Attention.backlight(true);
+		S_TIMER.schedule(TIMER.NOTIFY_LIGHT_OFF, {
+			:period => NOTIFY_LIGHT_OFF_PERIOD,
+			:callback => method(:notifyLightOff_callback),
+			:repeat => false});
+	}
+	
+	function notifyLightOff_callback(){
+		Attention.backlight(false);
 	}
 }

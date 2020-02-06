@@ -5,7 +5,8 @@ class TIMER {
 	enum {
 		REFRESH_VIEW,
 		REP_TIME,
-		REP_PAUSE_TIME
+		REP_PAUSE_TIME,
+		NOTIFY_LIGHT_OFF
 	}
 }
 

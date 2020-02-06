@@ -43,16 +43,15 @@ class ExerciseView extends WatchUi.View {
  	
  	function onShow(){
  	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-        												:period=>REFRESH_PERIOD,
-														:callback=>method(:refreshView_callback), 
-														:repeat=>true
-													 });
+			:period=>REFRESH_PERIOD,
+			:callback=>method(:refreshView_callback), 
+			:repeat=>true});
+			
 		if(!S_TIMER.resume(TIMER.REP_TIME)){											 
 	        S_TIMER.schedule(TIMER.REP_TIME, {
-	        											:period=>REP_PERIOD,
-														:callback=>method(:repTime_callback), 
-														:repeat=>false
-													 });
+				:period=>REP_PERIOD,
+				:callback=>method(:repTime_callback), 
+				:repeat=>false});
 		}
  	}
  	
