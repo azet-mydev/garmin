@@ -1,18 +1,22 @@
 using Toybox.WatchUi;
 
-class ExerciseDelegate extends CommonDelegate {
+class ExerciseDelegate extends WatchUi.BehaviorDelegate {
 
 	function initialize(){
-        CommonDelegate.initialize();
+        BehaviorDelegate.initialize();
     }
     
     function onSelect(){
-		pauseAction();
+		$.s.get(S.ACTIVITY).pause();
+		$.s.get(S.TIMER).pause(TimerSrvc.REP_TIME);
+		$.s.get(S.NOTIFY).signal(NotifySrvc.STOP);
+        $.s.get(S.SM).transition(SmSrvc.SELECT);
         return true;
     }
     
     function onBack(){
-    	lapAction();
+        $.s.get(S.TIMER).reset(TimerSrvc.REP_TIME);
+		$.s.get(S.NOTIFY).signal(NotifySrvc.LAP);
 		return true;
     }
 }

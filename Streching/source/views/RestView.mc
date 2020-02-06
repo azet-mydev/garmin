@@ -3,7 +3,7 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
  
 class RestView extends WatchUi.View {
- 	
+
 	function initialize(){
  		View.initialize();
  	}
@@ -20,9 +20,9 @@ class RestView extends WatchUi.View {
         var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
         dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
         
-        var counter = $.s.get(S.TIMER).getElapsedTime(TimerSrvc.REP_PAUSE_TIME);
-        var minutes = counter/60.toNumber();
-        var seconds = counter % 60;  
+        var timer = $.s.get(S.TIMER).getElapsedTime(TimerSrvc.REP_PAUSE_TIME);
+        var minutes = timer/60.toNumber();
+        var seconds = timer % 60;  
         var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   
 		var counterPosY = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_NUMBER_THAI_HOT)/2;
 		dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_WHITE);   
@@ -33,4 +33,23 @@ class RestView extends WatchUi.View {
         var hrPosY = dc.getHeight() - dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
         dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
  	}
+ 	
+ 	function onShow(){
+ 	    $.s.get(S.TIMER).schedule(TimerSrvc.REFRESH_VIEW, {
+        												:period=>REFRESH_PERIOD,
+														:callback=>method(:refreshView_callback), 
+														:repeat=>true
+														});
+		if(!$.s.get(S.TIMER).resume(TimerSrvc.REP_PAUSE_TIME)){											 
+			$.s.get(S.TIMER).schedule(TimerSrvc.REP_PAUSE_TIME, {});
+		}								
+ 	}
+ 	
+ 	function onHide(){
+ 		$.s.get(S.TIMER).remove(TimerSrvc.REFRESH_VIEW);
+ 	}
+ 	
+ 	function refreshView_callback() {
+		WatchUi.requestUpdate();
+	}
 }

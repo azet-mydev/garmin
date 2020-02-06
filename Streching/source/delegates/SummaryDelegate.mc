@@ -1,14 +1,13 @@
 using Toybox.WatchUi;
 
-class SummaryDelegate extends CommonDelegate {
+class SummaryDelegate extends WatchUi.BehaviorDelegate {
 
 	function initialize(){
-        CommonDelegate.initialize();
+        BehaviorDelegate.initialize();
     }
     
     function onSelect(){
     	$.s.get(S.ACTIVITY).resume();
-    	$.s.get(S.TIMER).resume();
         $.s.get(S.SM).transition(SmSrvc.SELECT);
         $.s.get(S.NOTIFY).signal(NotifySrvc.START);
         return true;
@@ -16,7 +15,7 @@ class SummaryDelegate extends CommonDelegate {
     
     function onBack(){
     	$.s.get(S.ACTIVITY).stop();
-    	$.s.get(S.TIMER).stop();
+    	$.s.get(S.TIMER).shutdown();
     	return false;
     }
 }

@@ -1,51 +1,47 @@
 using Toybox.Timer;
 
 class TimerSrvc {
-	
+
+////////////////////////////////////////////////////
+////////////////////// PUBLIC //////////////////////
+////////////////////////////////////////////////////
+
 	enum {
 		REFRESH_VIEW,
 		REP_TIME,
 		REP_PAUSE_TIME
 	}
 	
-	//Timer structure
-	enum {
-		PERIOD, 
-		COUNTER,
-		CALLBACK,
-		REPEAT
-	}
-	
-	private var timers = {};
-	
-	var timer = new Timer.Timer();
-
-	function start() {
-		timer.start(method(:timeOut), TIMER_PERIOD, true);
-	}
-	
-	function stop() {
-		timers = {};
-	}
-	
-	function pause() {
-		timer.stop();
-	}
-	
-	function resume() {
+	function schedule(name, options){
+		options.put(:counter, 0);
+		timers.put(name, options);
 		start();
 	}
 	
-	function add(name, options){
-		options.put(:counter, 0);
-		timers.put(name, options);
+	function remove(name){
+		timers.remove(name);
+		stop();		
 	}
 	
-	function registerTimer(timerName){
-		timers.put(timerName, 0);
+	function pause(name){
+		pausedTimers.put(name, timers.get(name));
+		timers.remove(name);
 	}
 	
-	function getElapsedTime(name){
+	function resume(name){
+		if(pausedTimers.hasKey(name)){
+			timers.put(name, pausedTimers.get(name));
+			pausedTimers.remove(name);
+			return true;
+		}
+		return false;
+	}
+	
+	function reset(name){
+		timers.get(name).put(:counter,0);
+	}
+	
+	public function getElapsedTime(name){
 		return timers.get(name).get(:counter);
 	}
 	
@@ -57,9 +53,22 @@ class TimerSrvc {
 		}
 	}
 	
-	function removeTimer(name){
-		timers.remove(name);
+	function shutdown(){
+		timers = {};
+		pausedTimers = {};
+		baseTimer.stop();
+		baseTimer = null;
 	}
+	
+////////////////////////////////////////////////////
+////////////////////// PRIVATE /////////////////////
+////////////////////////////////////////////////////	
+	
+	private var timers = {};
+	private var pausedTimers = {};
+	
+	private var baseTimer = new Timer.Timer();
+	private var isBaseTimerOn = false;
 	
 	function timeOut(){
 		for( var i = 0; i < timers.keys().size(); i += 1 ) {
@@ -79,11 +88,25 @@ class TimerSrvc {
 				if(repeat){
 					timers.get(name).put(:counter,0);
 				}else {
-					timers.remove(name);
+					remove(name);
 				}
 			}else {
 				timers.get(name).put(:counter, counter);
 			}
 		}
+	}
+	
+	private function start() {
+		if(!isBaseTimerOn){
+			baseTimer.start(method(:timeOut), BASE_TIMER_PERIOD, true);
+			isBaseTimerOn = true;
+		}
+	}
+	
+	private function stop() {
+		if(timers.size()==0){
+			baseTimer.stop();
+			isBaseTimerOn = false;
+		}	
 	}
 }

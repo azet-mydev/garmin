@@ -1,6 +1,7 @@
 using Toybox.WatchUi;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
+using Toybox.Sensor;
  
 class InitialView extends WatchUi.View {
  	
@@ -33,4 +34,16 @@ class InitialView extends WatchUi.View {
         var hrPosY = dc.getHeight() - dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
         dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
  	}
+ 	
+ 	function onShow(){
+ 		Sensor.enableSensorEvents(method(:onSensor_callback));
+ 	}
+ 	
+ 	function onHide(){
+ 		Sensor.enableSensorEvents(null);
+ 	}
+ 	
+ 	function onSensor_callback(info){
+		WatchUi.requestUpdate();
+	}
 }
