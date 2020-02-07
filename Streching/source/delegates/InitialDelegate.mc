@@ -8,8 +8,8 @@ class InitialDelegate extends WatchUi.BehaviorDelegate{
     
     function onSelect() {
         S_ACTIVITY.start();
-        S_SM.transition(SM.SELECT);
         S_NOTIFY.signal(NOTIFY.START);
+        S_SM.transition(SM.EXERCISE);
         return true;
     }
 }

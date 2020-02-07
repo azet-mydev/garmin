@@ -10,7 +10,7 @@ class RestDelegate extends WatchUi.BehaviorDelegate {
 		S_ACTIVITY.pause();
 		S_TIMER.pause(TIMER.REP_PAUSE_TIME);
 		S_NOTIFY.signal(NOTIFY.STOP);
-        S_SM.transition(SM.SELECT);
+        S_SM.transition(SM.SUMMARY);
         return true;
     }
     
@@ -18,7 +18,7 @@ class RestDelegate extends WatchUi.BehaviorDelegate {
 		S_ACTIVITY.lap();
 		S_TIMER.remove(TIMER.REP_PAUSE_TIME);
 		S_NOTIFY.signal(NOTIFY.LAP);
-		S_SM.transition(SM.BACK);
+		S_SM.transition(SM.EXERCISE);
 		return true;
     } 
 }

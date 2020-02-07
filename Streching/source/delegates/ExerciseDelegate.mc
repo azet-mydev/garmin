@@ -10,7 +10,7 @@ class ExerciseDelegate extends WatchUi.BehaviorDelegate {
 		S_ACTIVITY.pause();
 		S_TIMER.pause(TIMER.REP_TIME);
 		S_NOTIFY.signal(NOTIFY.STOP);
-        S_SM.transition(SM.SELECT);
+        S_SM.transition(SM.SUMMARY);
         return true;
     }
     

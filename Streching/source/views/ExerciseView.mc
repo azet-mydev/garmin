@@ -60,8 +60,8 @@ class ExerciseView extends WatchUi.View {
  	}
  	
  	function repTime_callback() {
-		S_SM.transition(SM.EXERCISE_TIMEOUT);
 		S_NOTIFY.signal(NOTIFY.TIMEOUT);
+		S_SM.transition(SM.REST);
 	}
 	
 	function refreshView_callback() {

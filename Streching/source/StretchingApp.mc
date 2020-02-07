@@ -1,37 +1,34 @@
 using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.Sensor;
+using Toybox.System;
 
 class StretchingApp extends Application.AppBase {
+	
+	var stateMachineConfig;
 
     function initialize() {
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
         
-        S_SM.init(
-        	new InitialView(),
-			new ExerciseView(),
-			new RestView(),
-			new SummaryView(),
-			new InitialDelegate(),
-			new ExerciseDelegate(),
-			new RestDelegate(),
-			new SummaryDelegate(),
-			SM.INITIAL
-		);
+        stateMachineConfig = {
+        	SM.INITIAL => {:view => new InitialView(), :delegate => new InitialDelegate()},
+        	SM.EXERCISE => {:view => new ExerciseView(), :delegate => new ExerciseDelegate()},
+        	SM.REST => {:view => new RestView(), :delegate => new RestDelegate()},
+        	SM.SUMMARY => {:view => new SummaryView(), :delegate => new SummaryDelegate()},
+        	SM.SUMMENU => {:view => new Rez.Menus.SumMenu(), :delegate => new SummaryMenuDelegate()}}; 
+        
+        S_SM.init(stateMachineConfig);
     }
 
-    // onStart() is called on application start up
     function onStart(state) {
     }
 
-    // onStop() is called when your application is exiting
     function onStop(state) {
     	S_TIMER.shutdown();
     }
 
-    // Return the initial view of your application here
     function getInitialView() {
-        return S_SM.getInit();
+        return S_SM.transition(SM.INITIAL);
     }
 }
