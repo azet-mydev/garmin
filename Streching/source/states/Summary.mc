@@ -1,4 +1,6 @@
 using Toybox.WatchUi;
+using Toybox.Time;
+using Toybox.Time.Gregorian;
 
 module Summary {
 
@@ -44,6 +46,11 @@ module Summary {
 		}
 	 	
 		function onShow(){
+			S_TIMER.schedule(TIMER.REFRESH_VIEW, {
+				:period=>REFRESH_PERIOD,
+				:callback=>method(:refreshView_callback), 
+				:repeat=>true});
+				
 			if(!showedSummaryMenu){
 				S_TIMER.schedule(TIMER.SUMMENU_APPEAR, {
 					:period => SUMMENU_APPEAR_PERIOD,
@@ -51,18 +58,53 @@ module Summary {
 					:repeat => false});
 			}
 		}
+		
+		function onHide(){
+	 		S_TIMER.remove(TIMER.REFRESH_VIEW);
+	 	}
+	 	
+	 	function refreshView_callback() {
+			WatchUi.requestUpdate();
+		} 
 	 	
 		function onUpdate(dc){
-			dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
-			dc.clear(); 
-			var x = dc.getWidth() / 2;
-			var y = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_MEDIUM);
-			dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
-			dc.drawText(x, y, Graphics.FONT_MEDIUM, "SummaryView", Graphics.TEXT_JUSTIFY_CENTER);
-					
-			var heartRate = Sensor.getInfo().heartRate;
-			y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
-			dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
+	 	    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
+	    	dc.clear();
+	    	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+	    	 
+			var posX = dc.getWidth() / 2;
+			
+			var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
+			var time = Lang.format("$1$:$2$", [today.hour,today.min.format("%02d")]);
+	        var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM);        
+	        dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
+	        
+	        var info = Activity.getActivityInfo();
+	        var counter = info.timerTime/1000;
+	        var minutes = counter/60.toNumber();
+	        var seconds = counter % 60;  
+	        var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   
+			var counterPosY = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_NUMBER_THAI_HOT)/2;
+			dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_BLACK);   
+	        dc.drawText(posX, counterPosY, Graphics.FONT_NUMBER_THAI_HOT, myTime, Graphics.TEXT_JUSTIFY_CENTER);
+	        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);  
+	        
+	        var cal;
+    		if (info.calories!=null){
+				cal = info.calories.toString() + " cal";
+			} else {
+				cal = "0 cal";
+			}
+			
+			var hr;
+			if(info.averageHeartRate!=null){
+				hr = info.averageHeartRate.toString() + " bps";
+			}else {
+				hr = "X bps";
+			}
+	        var hrPosY = dc.getHeight() - 2 * dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
+	        dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, cal, Graphics.TEXT_JUSTIFY_CENTER);
+	        dc.drawText(posX, hrPosY + dc.getFontHeight(Graphics.FONT_MEDIUM), Graphics.FONT_MEDIUM, hr, Graphics.TEXT_JUSTIFY_CENTER);
 		}
 	}
 	
@@ -120,7 +162,7 @@ module Summary {
 			var value;
 			switch (showMenuTitleIndex % 3) {
 				case 0: {
-					var seconds = info.elapsedTime/1000;
+					var seconds = info.timerTime/1000;
 					value = Lang.format("$1$:$2$", [seconds/60.toNumber(), (seconds % 60).format("%02d")]);
 					break;
 				}
@@ -134,9 +176,9 @@ module Summary {
 				}
 				case 2: {
 					if(info.averageHeartRate!=null){
-						value = info.averageHeartRate.toString();
+						value = info.averageHeartRate.toString() + " bps";
 					}else {
-						value = "X";
+						value = "X bps";
 					}
 					break;
 				}

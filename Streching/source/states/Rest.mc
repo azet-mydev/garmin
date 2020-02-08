@@ -42,7 +42,7 @@ module Rest {
 			
 			var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
 			var time = Lang.format("$1$:$2$", [today.hour,today.min.format("%02d")]);
-	        var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
+	        var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM);        
 	        dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
 	        
 	        var timer = S_TIMER.getElapsedTime(TIMER.REP_PAUSE_TIME);
@@ -55,7 +55,7 @@ module Rest {
 	        dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_WHITE);
 	        
 	        var heartRate = Sensor.getInfo().heartRate;
-	        var hrPosY = dc.getHeight() - dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
+	        var hrPosY = dc.getHeight() - 2 * dc.getFontHeight(Graphics.FONT_MEDIUM);        
 	        dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
 	 	}
 	 	
