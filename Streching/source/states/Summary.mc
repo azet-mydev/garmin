@@ -1,6 +1,15 @@
 using Toybox.WatchUi;
 
 module Summary {
+
+	var summaryMenuDelegate;
+	var summaryMenuView;
+	
+	var showedSummaryMenu = false;
+	
+	function showSummaryMenu(){
+		WatchUi.pushView(summaryMenuView, summaryMenuDelegate, SCREEN_TRANSITION);
+	}
 	
 	class SummaryDelegate extends WatchUi.BehaviorDelegate {
 	
@@ -11,40 +20,14 @@ module Summary {
 	    function onSelect(){
 	    	S_ACTIVITY.resume();
 	        S_NOTIFY.signal(NOTIFY.START);
+	        showedSummaryMenu = false;
 	        S_SM.transition(S_SM.getHistory(-1));
 	        return true;
 	    }
 	    
 	    function onBack(){
-	    	S_SM.transition(SM.SUMMENU);
+	    	showSummaryMenu();
 	    	return true;
-	    }
-	}
-	
-	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate {
-	
-	    function initialize() {
-	        Menu2InputDelegate.initialize();
-	    }
-	
-	    function onSelect(item) {
-	        if (item.getId() == :Continue){
-	            S_ACTIVITY.resume();
-	            S_NOTIFY.signal(NOTIFY.START);
-	            S_SM.transition(S_SM.getHistory(-2));
-	        } else if (item.getId() == :Save){
-	            S_ACTIVITY.stop();
-	        	S_NOTIFY.signal(NOTIFY.STOP);
-	        	System.exit();
-	        } else if (item.getId() == :Discard){
-	        	S_ACTIVITY.discard();
-	        	S_NOTIFY.signal(NOTIFY.STOP);
-	        	System.exit();
-	        }
-	    }
-	    
-	    function onBack(){
-	    	S_SM.transition(SM.SUMMARY);
 	    }
 	}
 	 
@@ -52,13 +35,15 @@ module Summary {
 	 	
 		function initialize(){
 			View.initialize();
+			summaryMenuDelegate = new SummaryMenuDelegate();
+			summaryMenuView = new SummaryMenuView();
 		}
 	 	
 		function onShow(){
-			if(S_SM.getHistory(-1) != SM.SUMMENU){
+			if(!showedSummaryMenu){
 				S_TIMER.schedule(TIMER.SUMMENU_APPEAR, {
 					:period => SUMMENU_APPEAR_PERIOD,
-					:callback => method(:summaryMenu_callback),
+					:callback => method(:showSummaryMenu),
 					:repeat => false});
 			}
 		}
@@ -75,27 +60,49 @@ module Summary {
 			y += dc.getFontHeight(Graphics.FONT_MEDIUM);        
 			dc.drawText(x, y, Graphics.FONT_MEDIUM, heartRate, Graphics.TEXT_JUSTIFY_CENTER);
 		}
-	 	
-		function summaryMenu_callback(){
-			S_SM.transition(SM.SUMMENU);
-		}
 	}
 	
-	class SumMenuView extends Rez.Menus.SumMenu {
+	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate {
 	
-		var showMenuTitleIndex = 0;
+	    function initialize() {
+	        Menu2InputDelegate.initialize();
+	    }
+	    
+	    function onSelect(item) {
+	        if (item.getId() == :Continue){
+	            S_ACTIVITY.resume();
+	            S_NOTIFY.signal(NOTIFY.START);
+	            showedSummaryMenu = false;
+	            S_SM.transition(S_SM.getHistory(-1)); //TODO: remove history
+	        } else if (item.getId() == :Save){
+	            S_ACTIVITY.stop();
+	        	S_NOTIFY.signal(NOTIFY.STOP);
+	        	System.exit();
+	        } else if (item.getId() == :Discard){
+	        	S_ACTIVITY.discard();
+	        	S_NOTIFY.signal(NOTIFY.STOP);
+	        	System.exit();
+	        }
+	    }
+	}
+	
+	class SummaryMenuView extends Rez.Menus.SumMenu {
+	
+		var showMenuTitleIndex;
 	
 		function initialize(){
 			Rez.Menus.SumMenu.initialize();
 		}
 		
 		function onShow(){
+			showedSummaryMenu = true;
+			showMenuTitleIndex = 0;
 			Rez.Menus.SumMenu.onShow();
 			S_TIMER.schedule(TIMER.SUMMMENU_TITLE_CHANGE, {
 				:period => SUMMMENU_TITLE_CHANGE_PERIOD,
-				:callback => method(:showMenuTitle_callback),
+				:callback => method(:rollOverMenuTitile),
 				:repeat => true});
-			showMenuTitle_callback();
+			rollOverMenuTitile();
 		}
 		
 		function onHide(){
@@ -103,7 +110,7 @@ module Summary {
 			S_TIMER.remove(TIMER.SUMMMENU_TITLE_CHANGE);
 		}
 		
-		function showMenuTitle_callback(){
+		function rollOverMenuTitile(){
 			var info = Activity.getActivityInfo();
 			var value;
 			switch (showMenuTitleIndex % 3) {
@@ -112,12 +119,22 @@ module Summary {
 					value = Lang.format("$1$:$2$", [seconds/60.toNumber(), (seconds % 60).format("%02d")]);
 					break;
 				}
-				case 1:
-					value = info.calories.toString() + " cal";
+				case 1: {
+					if (info.calories!=null){
+						value = info.calories.toString() + " cal";
+					} else {
+						value = "0 cal";
+					}
 					break;
-				case 2:
-					value = info.averageHeartRate.toString();
+				}
+				case 2: {
+					if(info.averageHeartRate!=null){
+						value = info.averageHeartRate.toString();
+					}else {
+						value = "X";
+					}
 					break;
+				}
 			}
 			showMenuTitleIndex++;
 			

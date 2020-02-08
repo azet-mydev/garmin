@@ -4,8 +4,7 @@ class SM {
 		INITIAL,
 		EXERCISE,
 		REST,
-		SUMMARY,
-		SUMMENU
+		SUMMARY
 	}
 }
 

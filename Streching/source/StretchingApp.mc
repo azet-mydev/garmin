@@ -15,8 +15,7 @@ class StretchingApp extends Application.AppBase {
         	SM.INITIAL => {:view => new Initial.InitialView(), :delegate => new Initial.InitialDelegate()},
         	SM.EXERCISE => {:view => new Exercise.ExerciseView(), :delegate => new Exercise.ExerciseDelegate()},
         	SM.REST => {:view => new Rest.RestView(), :delegate => new Rest.RestDelegate()},
-        	SM.SUMMARY => {:view => new Summary.SummaryView(), :delegate => new Summary.SummaryDelegate()},
-        	SM.SUMMENU => {:view => new Summary.SumMenuView(), :delegate => new Summary.SummaryMenuDelegate()}}; 
+        	SM.SUMMARY => {:view => new Summary.SummaryView(), :delegate => new Summary.SummaryDelegate()}}; 
         
         S_SM.init(stateMachineConfig);
     }
