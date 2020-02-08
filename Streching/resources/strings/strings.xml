@@ -1,9 +1,13 @@
 <strings>
     <string id="AppName">Stretching</string>
-
 	<string id="prompt">Click the menu button</string>
 
     <string id="summenu_continue">Continue</string>
     <string id="summenu_save">Save</string>
     <string id="summenu_discard">Discard</string>
+    
+    <string id="yes">Yes</string>
+    <string id="no">No</string>
+    
+    <string id="discardMenu_areYouSure">Are you sure?</string>
 </strings>

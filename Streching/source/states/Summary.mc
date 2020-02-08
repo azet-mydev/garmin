@@ -4,6 +4,8 @@ module Summary {
 
 	var summaryMenuDelegate;
 	var summaryMenuView;
+	var discardDialogDelegate;
+	var discardDialogView;
 	
 	var showedSummaryMenu = false;
 	
@@ -37,6 +39,8 @@ module Summary {
 			View.initialize();
 			summaryMenuDelegate = new SummaryMenuDelegate();
 			summaryMenuView = new SummaryMenuView();
+			discardDialogDelegate = new DiscardDialogDelegate();
+			discardDialogView = new Rez.Menus.DiscardMenu();
 		}
 	 	
 		function onShow(){
@@ -73,31 +77,31 @@ module Summary {
 	            S_ACTIVITY.resume();
 	            S_NOTIFY.signal(NOTIFY.START);
 	            showedSummaryMenu = false;
-	            S_SM.transition(S_SM.getHistory(-1)); //TODO: remove history
+	            S_SM.transition(S_SM.getHistory(-1));
 	        } else if (item.getId() == :Save){
 	            S_ACTIVITY.stop();
 	        	S_NOTIFY.signal(NOTIFY.STOP);
 	        	System.exit();
 	        } else if (item.getId() == :Discard){
-	        	S_ACTIVITY.discard();
-	        	S_NOTIFY.signal(NOTIFY.STOP);
-	        	System.exit();
+				WatchUi.pushView(discardDialogView, discardDialogDelegate, SCREEN_TRANSITION);
 	        }
 	    }
 	}
 	
-	class SummaryMenuView extends Rez.Menus.SumMenu {
+	class SummaryMenuView extends Rez.Menus.SummaryMenu {
 	
 		var showMenuTitleIndex;
 	
 		function initialize(){
-			Rez.Menus.SumMenu.initialize();
+			Rez.Menus.SummaryMenu.initialize();
 		}
 		
 		function onShow(){
+			Rez.Menus.SummaryMenu.onShow();
+			
 			showedSummaryMenu = true;
 			showMenuTitleIndex = 0;
-			Rez.Menus.SumMenu.onShow();
+			
 			S_TIMER.schedule(TIMER.SUMMMENU_TITLE_CHANGE, {
 				:period => SUMMMENU_TITLE_CHANGE_PERIOD,
 				:callback => method(:rollOverMenuTitile),
@@ -106,7 +110,8 @@ module Summary {
 		}
 		
 		function onHide(){
-			Rez.Menus.SumMenu.onHide();
+			Rez.Menus.SummaryMenu.onHide();
+			
 			S_TIMER.remove(TIMER.SUMMMENU_TITLE_CHANGE);
 		}
 		
@@ -141,5 +146,28 @@ module Summary {
 			self.setTitle(value);
 			WatchUi.requestUpdate();
 		}
+	}
+	
+	class DiscardDialogDelegate extends WatchUi.Menu2InputDelegate {
+	
+	    function onResponse(value) {
+	        if (value == WatchUi.CONFIRM_YES) {
+
+	        }
+	    }
+	    
+	   	function initialize() {
+	        Menu2InputDelegate.initialize();
+	    }
+	    
+	    function onSelect(item) {
+	        if (item.getId() == :Yes){
+	        	S_ACTIVITY.discard();
+	        	S_NOTIFY.signal(NOTIFY.STOP);
+	        	System.exit();
+	        } else if(item.getId() == :No){
+	        	WatchUi.popView(SCREEN_TRANSITION);
+	        }
+	    }
 	}
 }
