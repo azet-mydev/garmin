@@ -9,7 +9,7 @@ class SummaryDelegate extends WatchUi.BehaviorDelegate {
     function onSelect(){
     	S_ACTIVITY.resume();
         S_NOTIFY.signal(NOTIFY.START);
-        S_SM.transition(S_SM.transition(-1));
+        S_SM.transition(S_SM.getHistory(-1));
         return true;
     }
     

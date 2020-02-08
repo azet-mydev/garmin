@@ -8,8 +8,8 @@
  	
  	function onShow(){
  		if(S_SM.getHistory(-1) != SM.SUMMENU){
-	 		S_TIMER.schedule(TIMER.SUMMARY_MENU, {
-	 			:period => SUMMARY_MENU_PERIOD,
+	 		S_TIMER.schedule(TIMER.SUMMENU_APPEAR, {
+	 			:period => SUMMENU_APPEAR_PERIOD,
 	 			:callback => method(:summaryMenu_callback),
 	 			:repeat => false});
  		}
