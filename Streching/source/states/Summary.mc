@@ -44,6 +44,10 @@ module Summary {
 			discardDialogDelegate = new DiscardDialogDelegate();
 			discardDialogView = new Rez.Menus.DiscardMenu();
 		}
+			 	
+	 	function onLayout(dc){
+	 		setLayout(Rez.Layouts.Summary(dc));
+	 	}
 	 	
 		function onShow(){
 			S_TIMER.schedule(TIMER.REFRESH_VIEW, {
@@ -68,43 +72,20 @@ module Summary {
 		} 
 	 	
 		function onUpdate(dc){
-	 	    dc.setColor(Graphics.COLOR_BLACK, Graphics.COLOR_BLACK);
-	    	dc.clear();
-	    	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
-	    	 
-			var posX = dc.getWidth() / 2;
+			var time = View.findDrawableById("time");
+			time.setText(S_UTILITY.formatTimeNow());
+						
+			var counterVal = Activity.getActivityInfo().timerTime/1000;
+			var counter = View.findDrawableById("counter");
+			counter.setText(S_UTILITY.formatCounter(counterVal));
 			
-			var today = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
-			var time = Lang.format("$1$:$2$", [today.hour,today.min.format("%02d")]);
-	        var timePosY = dc.getFontHeight(Graphics.FONT_MEDIUM);        
-	        dc.drawText(posX, timePosY, Graphics.FONT_MEDIUM, time, Graphics.TEXT_JUSTIFY_CENTER);
-	        
-	        var info = Activity.getActivityInfo();
-	        var counter = info.timerTime/1000;
-	        var minutes = counter/60.toNumber();
-	        var seconds = counter % 60;  
-	        var myTime = Lang.format("$1$:$2$", [minutes, seconds.format("%02d")]);   
-			var counterPosY = dc.getHeight() / 2 - dc.getFontHeight(Graphics.FONT_NUMBER_THAI_HOT)/2;
-			dc.setColor(Graphics.COLOR_ORANGE, Graphics.COLOR_BLACK);   
-	        dc.drawText(posX, counterPosY, Graphics.FONT_NUMBER_THAI_HOT, myTime, Graphics.TEXT_JUSTIFY_CENTER);
-	        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);  
-	        
-	        var cal;
-    		if (info.calories!=null){
-				cal = info.calories.toString() + " cal";
-			} else {
-				cal = "0 cal";
-			}
+			var hr = View.findDrawableById("hr");
+			hr.setText(S_UTILITY.formatData2(Activity.getActivityInfo().averageHeartRate, " bps"));
 			
-			var hr;
-			if(info.averageHeartRate!=null){
-				hr = info.averageHeartRate.toString() + " bps";
-			}else {
-				hr = "X bps";
-			}
-	        var hrPosY = dc.getHeight() - 2 * dc.getFontHeight(Graphics.FONT_MEDIUM) - dc.getFontHeight(Graphics.FONT_MEDIUM)/2;        
-	        dc.drawText(posX, hrPosY, Graphics.FONT_MEDIUM, cal, Graphics.TEXT_JUSTIFY_CENTER);
-	        dc.drawText(posX, hrPosY + dc.getFontHeight(Graphics.FONT_MEDIUM), Graphics.FONT_MEDIUM, hr, Graphics.TEXT_JUSTIFY_CENTER);
+			var calories = View.findDrawableById("calories");
+			calories.setText(S_UTILITY.formatData2(Activity.getActivityInfo().calories, " C"));
+			
+			View.onUpdate(dc);
 		}
 	}
 	
@@ -192,12 +173,6 @@ module Summary {
 	
 	class DiscardDialogDelegate extends WatchUi.Menu2InputDelegate {
 	
-	    function onResponse(value) {
-	        if (value == WatchUi.CONFIRM_YES) {
-
-	        }
-	    }
-	    
 	   	function initialize() {
 	        Menu2InputDelegate.initialize();
 	    }
