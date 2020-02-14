@@ -19,14 +19,14 @@ class UtilityService{
 		
 	}
 	
-	function formatData(value){
+	function formatNullableData(value){
 		if (value != null){
-			return Lang.format("$1$", [value]);
+			value.toString();
 		}
 		return "--";
 	}
 	
-	function formatData2(value, suffix){
-		return formatData(value)+suffix;
+	function formatNullableData2(value, suffix){
+		return formatNullableData(value)+suffix;
 	}
 }

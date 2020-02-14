@@ -3,6 +3,11 @@ using Toybox.Graphics;
 
 module Exercise {
 
+	var exerciseNumberView;
+	var exerciseNumberDelegate;
+	
+	var showedExerciseNumber = false;
+
 	class ExerciseDelegate extends WatchUi.BehaviorDelegate {
 	
 		function initialize(){
@@ -28,6 +33,8 @@ module Exercise {
 	
 		function initialize(){
 	 		View.initialize();
+	 		exerciseNumberView = new ExerciseNumberView();
+	 		exerciseNumberDelegate = new WatchUi.InputDelegate();
 	 	}
 	 	
 	 	function onLayout(dc){
@@ -43,7 +50,7 @@ module Exercise {
 			counter.setText(S_UTILITY.formatCounter(counterVal));
 			
 			var hr = View.findDrawableById("hr");
-			hr.setText(S_UTILITY.formatData(Sensor.getInfo().heartRate));
+			hr.setText(S_UTILITY.formatNullableData(Sensor.getInfo().heartRate));
 			
 			View.onUpdate(dc);
 			
@@ -58,11 +65,15 @@ module Exercise {
 				:callback=>method(:refreshView_callback), 
 				:repeat=>true});
 				
-			if(!S_TIMER.resume(TIMER.REP_TIME)){											 
+			if(!S_TIMER.resume(TIMER.REP_TIME) && !S_TIMER.isRunning(TIMER.REP_TIME)){											 
 		        S_TIMER.schedule(TIMER.REP_TIME, {
 					:period=>REP_PERIOD,
 					:callback=>method(:repTime_callback), 
 					:repeat=>false});
+			}
+			
+			if(!showedExerciseNumber){
+				WatchUi.pushView(exerciseNumberView, exerciseNumberDelegate, SCREEN_TRANSITION);
 			}
 	 	}
 	 	
@@ -71,6 +82,7 @@ module Exercise {
 	 	}
 	 	
 	 	function repTime_callback() {
+	 		showedExerciseNumber = false;
 			S_NOTIFY.signal(NOTIFY.TIMEOUT);
 			S_SM.transition(SM.REST);
 		}
@@ -78,5 +90,36 @@ module Exercise {
 		function refreshView_callback() {
 			WatchUi.requestUpdate();
 		} 
+	}
+	
+	class ExerciseNumberView extends WatchUi.View {
+		
+		function initialize(){
+	 		View.initialize();
+	 	}
+	 	
+	 	function onLayout(dc){
+	 		setLayout(Rez.Layouts.ExerciseNumber(dc));
+	 	}
+	 	
+	 	function onShow(){
+	 		showedExerciseNumber = true;
+			S_DATA.exercise();	 	
+	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
+				:period=>EXERCISE_NUMBER_PERIOD,
+				:callback=>method(:exerciseNumberTimeout_callback), 
+				:repeat=>false});
+	 	}
+	 	
+	 	function onUpdate(dc){
+	 		var exerciseNumber = View.findDrawableById("exerciseNumber");
+			exerciseNumber.setText(S_DATA.getExerciseNumber().toString());
+	 	
+			View.onUpdate(dc);
+	 	}
+	 	
+	 	function exerciseNumberTimeout_callback(){
+	 		WatchUi.popView(SCREEN_TRANSITION);
+	 	}
 	}
 }

@@ -72,6 +72,9 @@ class NotifyService{
 	
 	private function blink(){
 		Attention.backlight(true);
+		if(S_TIMER.isRunning(TIMER.NOTIFY_LIGHT_OFF)){
+			S_TIMER.remove(TIMER.NOTIFY_LIGHT_OFF);
+		}
 		S_TIMER.schedule(TIMER.NOTIFY_LIGHT_OFF, {
 			:period => NOTIFY_LIGHT_OFF_PERIOD,
 			:callback => method(:notifyLightOff_callback),

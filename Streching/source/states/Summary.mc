@@ -1,6 +1,4 @@
 using Toybox.WatchUi;
-using Toybox.Time;
-using Toybox.Time.Gregorian;
 
 module Summary {
 
@@ -74,16 +72,19 @@ module Summary {
 		function onUpdate(dc){
 			var time = View.findDrawableById("time");
 			time.setText(S_UTILITY.formatTimeNow());
+			
+			var ex = View.findDrawableById("ex");
+			ex.setText(S_DATA.getExerciseNumber() + " ex");
 						
 			var counterVal = Activity.getActivityInfo().timerTime/1000;
 			var counter = View.findDrawableById("counter");
 			counter.setText(S_UTILITY.formatCounter(counterVal));
 			
 			var hr = View.findDrawableById("hr");
-			hr.setText(S_UTILITY.formatData2(Activity.getActivityInfo().averageHeartRate, " bps"));
+			hr.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, " bps"));
 			
 			var calories = View.findDrawableById("calories");
-			calories.setText(S_UTILITY.formatData2(Activity.getActivityInfo().calories, " C"));
+			calories.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, " C"));
 			
 			View.onUpdate(dc);
 		}
@@ -141,26 +142,21 @@ module Summary {
 		function rollOverMenuTitile(){
 			var info = Activity.getActivityInfo();
 			var value;
-			switch (showMenuTitleIndex % 3) {
+			switch (showMenuTitleIndex % 4) {
 				case 0: {
-					var seconds = info.timerTime/1000;
-					value = Lang.format("$1$:$2$", [seconds/60.toNumber(), (seconds % 60).format("%02d")]);
+					value = S_UTILITY.formatTimeNow();
 					break;
 				}
 				case 1: {
-					if (info.calories!=null){
-						value = info.calories.toString() + " cal";
-					} else {
-						value = "0 cal";
-					}
+					value = S_DATA.getExerciseNumber() + " ex";
 					break;
 				}
 				case 2: {
-					if(info.averageHeartRate!=null){
-						value = info.averageHeartRate.toString() + " bps";
-					}else {
-						value = "X bps";
-					}
+					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, " C");
+					break;
+				}
+				case 3: {
+					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, " bps");
 					break;
 				}
 			}

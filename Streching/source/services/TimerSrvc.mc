@@ -1,4 +1,5 @@
 using Toybox.Timer;
+using Toybox.System;
 
 class TIMER {
 
@@ -8,7 +9,8 @@ class TIMER {
 		REP_PAUSE_TIME,
 		NOTIFY_LIGHT_OFF,
 		SUMMENU_APPEAR,
-		SUMMMENU_TITLE_CHANGE
+		SUMMMENU_TITLE_CHANGE,
+		EXERCISE_NUMBER
 	}
 }
 
@@ -19,9 +21,13 @@ class TimerService {
 ////////////////////////////////////////////////////
 	
 	function schedule(name, options){
+		if(timers.hasKey(name)){
+			System.println("Timer:" + name + " already scheduled, overriding!");
+		}
 		options.put(:counter, 0);
 		timers.put(name, options);
 		start();
+
 	}
 	
 	function remove(name){
@@ -45,6 +51,10 @@ class TimerService {
 	
 	function reset(name){
 		timers.get(name).put(:counter,0);
+	}
+	
+	function isRunning(name){
+		return timers.hasKey(name);
 	}
 	
 	public function getElapsedTime(name){

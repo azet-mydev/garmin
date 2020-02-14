@@ -46,7 +46,7 @@ module Rest {
 			counter.setText(S_UTILITY.formatCounter(counterVal));
 			
 			var hr = View.findDrawableById("hr");
-			hr.setText(S_UTILITY.formatData(Sensor.getInfo().heartRate));
+			hr.setText(S_UTILITY.formatNullableData(Sensor.getInfo().heartRate));
 			
 			View.onUpdate(dc);
 	 	}
