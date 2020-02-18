@@ -24,6 +24,7 @@ module Initial {
 	 	
 	 	function onLayout(dc){
 	 		setLayout(Rez.Layouts.Initial(dc));
+//	 		WatchUi.animate( View.findDrawableById("counter"), :locX, WatchUi.ANIM_TYPE_LINEAR, -100, dc.getWidth() + 50, 1, null );
 	 	}
 	 	
 	 	function onUpdate(dc){
