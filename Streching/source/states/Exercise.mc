@@ -104,7 +104,7 @@ module Exercise {
 	 	
 	 	function onShow(){
 	 		showedExerciseNumber = true;
-			S_DATA.exercise();	 	
+			S_DATA.exerciseNumber++; 	
 	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
 				:period=>EXERCISE_NUMBER_PERIOD,
 				:callback=>method(:exerciseNumberTimeout_callback), 
@@ -113,7 +113,7 @@ module Exercise {
 	 	
 	 	function onUpdate(dc){
 	 		var exerciseNumber = View.findDrawableById("exerciseNumber");
-			exerciseNumber.setText(S_DATA.getExerciseNumber().toString());
+			exerciseNumber.setText(S_DATA.exerciseNumber.toString());
 	 	
 			View.onUpdate(dc);
 	 	}

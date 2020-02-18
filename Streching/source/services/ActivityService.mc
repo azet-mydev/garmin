@@ -34,7 +34,9 @@ class ActivityService
 	}
 	
 	function lap(){
-		session.addLap();
+		if(S_DATA.cfg_activityLap){
+			session.addLap();
+		}
 	}
 	
 	function discard(){
