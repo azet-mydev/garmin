@@ -34,7 +34,7 @@ class ActivityService
 	}
 	
 	function lap(){
-		if(S_DATA.cfg_activityLap){
+		if(S_DATA.cfg.get(CFG.ACTIVITY_LAP).get(:value)){
 			session.addLap();
 		}
 	}

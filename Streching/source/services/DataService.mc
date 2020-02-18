@@ -1,10 +1,20 @@
+class CFG {
+
+	enum {
+		ACTIVITY_LAP,
+		ACTIVITY_SOUND,
+		ACTIVITY_BACKLIGHT,
+		ACTIVITY_VIBRATION
+	}
+}
+
 class DataService{
+
+	var cfg;
 	
-	//Settings
-	var cfg_activityLap = false;
-	var cfg_activitySound = false;
-	var cfg_activityBacklight = true;
-	var cfg_activityVibration = true;
+	function init(cfg){
+		self.cfg = cfg;
+	}
 	
 	//Data
 	var exerciseNumber = 0;

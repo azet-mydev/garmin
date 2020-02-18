@@ -12,4 +12,10 @@
     <string id="discardMenu_areYouSure">Are you sure?</string>
     
     <string id="exercise">Exercise</string>
+    
+    <string id="settings">Settings</string>
+    <string id="lap">Lap</string>
+    <string id="sound">Sound</string>
+    <string id="vibration">Vibration</string>
+    <string id="backlight">Backlight</string>
 </strings>
