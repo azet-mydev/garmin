@@ -21,7 +21,7 @@ class UtilityService{
 	
 	function formatNullableData(value){
 		if (value != null){
-			value.toString();
+			return value.toString();
 		}
 		return "--";
 	}

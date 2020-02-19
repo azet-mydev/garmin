@@ -1,7 +1,6 @@
 using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.Sensor;
-using Toybox.System;
 
 class StretchingApp extends Application.AppBase {
 	

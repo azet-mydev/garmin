@@ -1,5 +1,5 @@
 using Toybox.WatchUi;
-using Toybox.System;
+using Toybox.Sensor;
 
 module Initial {
 	
@@ -36,6 +36,7 @@ module Initial {
 			counter.setText(S_UTILITY.formatCounter(REP_PERIOD));
 			
 			var hr = View.findDrawableById("hr");
+			var info = Sensor.getInfo();
 			hr.setText(S_UTILITY.formatNullableData(Sensor.getInfo().heartRate));
 
 			View.onUpdate(dc);
