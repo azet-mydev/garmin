@@ -8,10 +8,10 @@ module Exercise {
 	
 	var showedExerciseNumber = false;
 
-	class ExerciseDelegate extends WatchUi.BehaviorDelegate {
+	class ExerciseDelegate extends Common.Delegate {
 	
 		function initialize(){
-	        BehaviorDelegate.initialize();
+	        Delegate.initialize();
 	    }
 	    
 	    function onSelect(){

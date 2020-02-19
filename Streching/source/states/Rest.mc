@@ -4,10 +4,10 @@ using Toybox.Time.Gregorian;
 
 module Rest {
 	
-	class RestDelegate extends WatchUi.BehaviorDelegate {
+	class RestDelegate extends Common.Delegate {
 	
 		function initialize() {
-	        BehaviorDelegate.initialize();
+	        Delegate.initialize();
 	    }
 	    
 	    function onSelect() {

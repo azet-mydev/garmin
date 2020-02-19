@@ -3,27 +3,16 @@ using Toybox.System;
 
 module Initial {
 	
-	class InitialDelegate extends WatchUi.BehaviorDelegate{
+	class InitialDelegate extends Common.Delegate {
 	
 		function initialize() {
-	        BehaviorDelegate.initialize();
+	        Delegate.initialize();
 	    }
 	    
 	    function onSelect() {
 	        S_ACTIVITY.start();
 	        S_NOTIFY.signal(NOTIFY.START);
 	        S_SM.transition(SM.EXERCISE);
-	        return true;
-	    }
-	    
-	    function onMenu() {
-            var settingsMenu = new WatchUi.Menu2({:title=>Rez.Strings.settings});
-            for( var i = 0; i < S_DATA.cfg.keys().size(); i += 1 ) {
-            	var cfgKey = S_DATA.cfg.keys()[i];
-            	var cfg = S_DATA.cfg.get(cfgKey);
-            	settingsMenu.addItem(new ToggleMenuItem(cfg.get(:name), null, cfgKey, cfg.get(:value), {}));
-            }
-	        WatchUi.pushView(settingsMenu, new SettingsMenuDelegate(), SCREEN_TRANSITION);
 	        return true;
 	    }
 	}
@@ -62,17 +51,6 @@ module Initial {
 	 	
 	 	function onSensor_callback(info){
 			WatchUi.requestUpdate();
-		}
-	}
-	
-	class SettingsMenuDelegate extends WatchUi.Menu2InputDelegate {
-	
-	    function initialize() {
-	        Menu2InputDelegate.initialize();
-	    }
-	    
-	    function onSelect(item) {
-	    	S_DATA.cfg.get(item.getId()).put(:value, item.isEnabled());
 		}
 	}
 }

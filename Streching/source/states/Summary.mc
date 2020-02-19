@@ -13,10 +13,10 @@ module Summary {
 		WatchUi.pushView(summaryMenuView, summaryMenuDelegate, SCREEN_TRANSITION);
 	}
 	
-	class SummaryDelegate extends WatchUi.BehaviorDelegate {
+	class SummaryDelegate extends Common.Delegate {
 	
 		function initialize(){
-	        BehaviorDelegate.initialize();
+	        Delegate.initialize();
 	    }
 	    
 	    function onSelect(){
