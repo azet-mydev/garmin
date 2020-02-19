@@ -7,7 +7,8 @@ const ACTIVITY_SPORT = ActivityRecording.SPORT_TRAINING;
 const ACTIVITY_SUB_SPORT = ActivityRecording.SUB_SPORT_FLEXIBILITY_TRAINING;
 
 const BASE_TIMER_PERIOD = 1000;
-const REP_PERIOD = 5;
+(:debug) const REP_PERIOD = 5;
+(:release) const REP_PERIOD = 90;
 const REFRESH_PERIOD = 1;
 const NOTIFY_LIGHT_OFF_PERIOD = 5;
 const SUMMENU_APPEAR_PERIOD = 2;
