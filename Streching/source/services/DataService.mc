@@ -1,6 +1,7 @@
 class CFG {
 
 	enum {
+		REPETITION_INTERVAL,
 		ACTIVITY_LAP,
 		ACTIVITY_SOUND,
 		ACTIVITY_BACKLIGHT,
@@ -10,6 +11,8 @@ class CFG {
 
 class DataService{
 
+	//ToDo: Define keys used in here for better visibility
+	
 	var cfg;
 	
 	function init(cfg){

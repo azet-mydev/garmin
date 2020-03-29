@@ -1,5 +1,4 @@
 using Toybox.Timer;
-using Toybox.System;
 
 class TIMER {
 
@@ -12,6 +11,25 @@ class TIMER {
 		SUMMMENU_TITLE_CHANGE,
 		EXERCISE_NUMBER
 	}
+	
+	function toString(name){
+		switch (name){
+			case TIMER.REFRESH_VIEW:
+				return "REFRESH_VIEW";
+			case TIMER.REP_TIME:
+				return "REP_TIME";
+			case TIMER.REP_PAUSE_TIME:
+				return "REP_PAUSE_TIME";
+			case TIMER.NOTIFY_LIGHT_OFF:
+				return "NOTIFY_LIGHT_OFF";
+			case TIMER.SUMMENU_APPEAR:
+				return "SUMMENU_APPEAR";
+			case TIMER.SUMMMENU_TITLE_CHANGE:
+				return "SUMMMENU_TITLE_CHANGE";
+			case TIMER.EXERCISE_NUMBER:
+				return "EXERCISE_NUMBER";
+		}
+	}
 }
 
 class TimerService {
@@ -22,21 +40,30 @@ class TimerService {
 	
 	function schedule(name, options){
 		if(timers.hasKey(name)){
-			System.println("Timer:" + name + " already scheduled, overriding!");
+			LOG("TimerService", "Timer:" + TIMER.toString(name) + " already scheduled, overriding!");
 		}
 		options.put(:counter, 0);
 		timers.put(name, options);
+		
+		LOG("TimerService", "Scheduling timer:" + TIMER.toString(name) + ", period:" + options.get(:period));
+		
 		start();
 
 	}
 	
 	function remove(name){
 		timers.remove(name);
+		
+		LOG("TimerService", "Removing timer:" + TIMER.toString(name));
+		
 		stop();		
 	}
 	
 	function pause(name){
 		pausedTimers.put(name, timers.get(name));
+		
+		LOG("TimerService", "Pausing timer:" + TIMER.toString(name));
+		
 		timers.remove(name);
 	}
 	
@@ -44,17 +71,40 @@ class TimerService {
 		if(pausedTimers.hasKey(name)){
 			timers.put(name, pausedTimers.get(name));
 			pausedTimers.remove(name);
+			
+			LOG("TimerService", "Resuming timer:" + TIMER.toString(name));
+			
 			return true;
 		}
+		
+		LOG("TimerService", "Not able to resume timer:" + TIMER.toString(name) +", timer not paused!");
+		
 		return false;
 	}
 	
-	function reset(name){
+	function reset(name, options){
+		if(options.hasKey(:period)){
+			timers.get(name).put(:period, options.get(:period));
+		}
 		timers.get(name).put(:counter,0);
+		
+		LOG("TimerService", "Reseting timer:" + TIMER.toString(name) +", period:" + timers.get(name).get(:period));
 	}
 	
 	function isRunning(name){
 		return timers.hasKey(name);
+	}
+	
+	function isNotRunning(name){
+		return !timers.hasKey(name);
+	}
+	
+	function isPaused(name){
+		return pausedTimers.hasKey(name);
+	}
+	
+	function isNotPaused(name){
+		return !pausedTimers.hasKey(name);
 	}
 	
 	public function getElapsedTime(name){
@@ -70,10 +120,14 @@ class TimerService {
 	}
 	
 	function shutdown(){
+		LOG("TimerService", "Shuting down timer service, no of timers:" + timers.size() +", paused timers:" + pausedTimers.size());
+		
 		timers = {};
 		pausedTimers = {};
 		baseTimer.stop();
 		baseTimer = null;
+		
+		LOG("TimerService", "Timer service shut down");
 	}
 	
 ////////////////////////////////////////////////////

@@ -8,7 +8,9 @@ class StretchingApp extends Application.AppBase {
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
         
+        //ToDo: Add default values for those confings in Const.mc
         var settingsConfig = {
+        	CFG.REPETITION_INTERVAL => {:name=>Rez.Strings.interval, :value=>DEFAULT_REPETITION_INTERVAL},
 			CFG.ACTIVITY_LAP => {:name=>Rez.Strings.lap, :value=>false},
 			CFG.ACTIVITY_SOUND => {:name=>Rez.Strings.sound, :value=>false},
 			CFG.ACTIVITY_BACKLIGHT => {:name=>Rez.Strings.backlight, :value=>true},
@@ -21,6 +23,8 @@ class StretchingApp extends Application.AppBase {
         	SM.REST => {:view => new Rest.RestView(), :delegate => new Rest.RestDelegate()},
         	SM.SUMMARY => {:view => new Summary.SummaryView(), :delegate => new Summary.SummaryDelegate()}}; 
         S_SM.init(stateMachineConfig);
+        
+        LOG("StretchingApp", "Starting application");
     }
 
     function onStart(state) {

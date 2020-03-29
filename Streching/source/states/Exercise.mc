@@ -23,7 +23,8 @@ module Exercise {
 	    }
 	    
 	    function onBack(){
-	        S_TIMER.reset(TIMER.REP_TIME);
+	        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value)});
+	        
 			S_NOTIFY.signal(NOTIFY.LAP);
 			return true;
 	    }
@@ -56,20 +57,26 @@ module Exercise {
 			
 			dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);    	
 	    	dc.setPenWidth(10);
-			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/REP_PERIOD);
+			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value));
 	 	}
 	 	
 	 	function onShow(){
-	 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-				:period=>REFRESH_PERIOD,
-				:callback=>method(:refreshView_callback), 
-				:repeat=>true});
-				
-			if(!S_TIMER.resume(TIMER.REP_TIME) && !S_TIMER.isRunning(TIMER.REP_TIME)){											 
-		        S_TIMER.schedule(TIMER.REP_TIME, {
-					:period=>REP_PERIOD,
-					:callback=>method(:repTime_callback), 
-					:repeat=>false});
+	 		if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
+		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
+					:period=>REFRESH_PERIOD,
+					:callback=>method(:refreshView_callback), 
+					:repeat=>true});
+			}
+			
+			if(S_TIMER.isNotRunning(TIMER.REP_TIME)){
+				if(S_TIMER.isPaused(TIMER.REP_TIME)){
+					S_TIMER.resume(TIMER.REP_TIME);
+				} else {
+					S_TIMER.schedule(TIMER.REP_TIME, {
+						:period=>S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value),
+						:callback=>method(:repTime_callback), 
+						:repeat=>false});
+				}
 			}
 			
 			if(!showedExerciseNumber){

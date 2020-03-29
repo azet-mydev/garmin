@@ -52,13 +52,20 @@ module Rest {
 	 	}
 	 	
 	 	function onShow(){
-	 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-				:period=>REFRESH_PERIOD,
-				:callback=>method(:refreshView_callback), 
-				:repeat=>true});
-			if(!S_TIMER.resume(TIMER.REP_PAUSE_TIME)){											 
-				S_TIMER.schedule(TIMER.REP_PAUSE_TIME, {});
-			}								
+	 		 if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
+		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
+					:period=>REFRESH_PERIOD,
+					:callback=>method(:refreshView_callback), 
+					:repeat=>true});
+			}
+			
+			if(S_TIMER.isNotRunning(TIMER.REP_PAUSE_TIME)){
+				if(S_TIMER.isPaused(TIMER.REP_PAUSE_TIME)){
+					S_TIMER.resume(TIMER.REP_PAUSE_TIME);
+				} else {
+					S_TIMER.schedule(TIMER.REP_PAUSE_TIME, {});
+				}
+			}
 	 	}
 	 	
 	 	function onHide(){

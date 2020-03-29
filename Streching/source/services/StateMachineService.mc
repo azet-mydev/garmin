@@ -6,6 +6,19 @@ class SM {
 		REST,
 		SUMMARY
 	}
+	
+	function toString(name){
+		switch (name){
+			case SM.INITIAL:
+				return "INITIAL";
+			case SM.EXERCISE:
+				return "EXERCISE";
+			case SM.REST:
+				return "REST";
+			case SM.SUMMARY:
+				return "SUMMARY";
+		}
+	}
 }
 
 class StateMachineService {
@@ -36,6 +49,9 @@ class StateMachineService {
 		
 		var view = config.get(newState).get(:view);
 		var delegate = config.get(newState).get(:delegate);
+		
+		LOG("StateMachineService", "State transition -> " + SM.toString(newState));
+		
 		WatchUi.switchToView(view, delegate, SCREEN_TRANSITION);
 		
 		return [view, delegate];
