@@ -10,6 +10,8 @@ module Initial {
 	    }
 	    
 	    function onSelect() {
+	    	LOG("InitialDelegate","Invoking onSelect()");
+	        
 	        S_ACTIVITY.start();
 	        S_NOTIFY.signal(NOTIFY.START);
 	        S_SM.transition(SM.EXERCISE);

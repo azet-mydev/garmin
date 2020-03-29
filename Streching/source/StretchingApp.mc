@@ -1,10 +1,13 @@
 using Toybox.Application;
 using Toybox.WatchUi;
 using Toybox.Sensor;
+using Toybox.Lang;
 
 class StretchingApp extends Application.AppBase {
 	
     function initialize() {
+    	LOG("StretchingApp", "Starting application");
+    	
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
         
@@ -23,15 +26,17 @@ class StretchingApp extends Application.AppBase {
         	SM.REST => {:view => new Rest.RestView(), :delegate => new Rest.RestDelegate()},
         	SM.SUMMARY => {:view => new Summary.SummaryView(), :delegate => new Summary.SummaryDelegate()}}; 
         S_SM.init(stateMachineConfig);
-        
-        LOG("StretchingApp", "Starting application");
     }
 
     function onStart(state) {
     }
 
     function onStop(state) {
+    	LOG("StretchingApp", "Shuting down application");
+    	
     	S_TIMER.shutdown();
+    	
+    	LOG("StretchingApp", "Shut down successful, exit!");
     }
 
     function getInitialView() {

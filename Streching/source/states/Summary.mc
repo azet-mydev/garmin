@@ -10,7 +10,7 @@ module Summary {
 	var showedSummaryMenu = false;
 	
 	function showSummaryMenu(){
-		WatchUi.pushView(summaryMenuView, summaryMenuDelegate, SCREEN_TRANSITION);
+		LOAD("SummaryMenuView", summaryMenuView, summaryMenuDelegate);
 	}
 	
 	class SummaryDelegate extends Common.Delegate {
@@ -20,6 +20,8 @@ module Summary {
 	    }
 	    
 	    function onSelect(){
+	    	LOG("SummaryDelegate","Invoking onSelect()");
+	    	
 	    	S_ACTIVITY.resume();
 	        S_NOTIFY.signal(NOTIFY.START);
 	        showedSummaryMenu = false;
@@ -28,6 +30,8 @@ module Summary {
 	    }
 	    
 	    function onBack(){
+	    	LOG("SummaryDelegate","Invoking onBack()");
+	    	
 	    	showSummaryMenu();
 	    	return true;
 	    }
@@ -98,16 +102,22 @@ module Summary {
 	    
 	    function onSelect(item) {
 	        if (item.getId() == :Continue){
+	        	LOG("SummaryMenuDelegate","Invoking onSelect(Continue)");
+	        	
 	            S_ACTIVITY.resume();
 	            S_NOTIFY.signal(NOTIFY.START);
 	            showedSummaryMenu = false;
 	            S_SM.transition(S_SM.getHistory(-1));
 	        } else if (item.getId() == :Save){
+	        	LOG("SummaryMenuDelegate","Invoking onSelect(Save)");
+	        	
 	            S_ACTIVITY.stop();
 	        	S_NOTIFY.signal(NOTIFY.STOP);
 	        	System.exit();
 	        } else if (item.getId() == :Discard){
-				WatchUi.pushView(discardDialogView, discardDialogDelegate, SCREEN_TRANSITION);
+	        	LOG("SummaryMenuDelegate","Invoking onSelect(Discard)");
+	        	
+				LOAD("DiscardDialogView", discardDialogView, discardDialogDelegate);
 	        }
 	    }
 	}
@@ -175,11 +185,15 @@ module Summary {
 	    
 	    function onSelect(item) {
 	        if (item.getId() == :Yes){
+	        	LOG("DiscardDialogDelegate","Invoking onSelect(Yes)");
+	        	
 	        	S_ACTIVITY.discard();
 	        	S_NOTIFY.signal(NOTIFY.STOP);
 	        	System.exit();
 	        } else if(item.getId() == :No){
-	        	WatchUi.popView(SCREEN_TRANSITION);
+	        	LOG("DiscardDialogDelegate","Invoking onSelect(No)");
+	        	
+	        	UNLOAD("DiscardDialogView");
 	        }
 	    }
 	}

@@ -14,6 +14,8 @@ module Common {
 		}
 		
 		function onMenu() {
+			LOG("Delegate","Invoking onMenu()");
+		
 			var settingsMenuView = new WatchUi.Menu2({:title=>Rez.Strings.settings});
 		    for( var i = 0; i < S_DATA.cfg.keys().size(); i += 1 ) {
 		    	var cfgKey = S_DATA.cfg.keys()[i];
@@ -26,8 +28,38 @@ module Common {
 		    		settingsMenuView.addItem(new MenuItem(cfgName, null, cfgKey, {}));
 		    	}
 		    }
-		    WatchUi.pushView(settingsMenuView, settingsMenuDelegate, SCREEN_TRANSITION);
+		    LOAD("SettingsMenuView", settingsMenuView, settingsMenuDelegate);
 		    return true;
+		}
+		
+		function onBack(){
+			LOG("Delegate","Invoking onBack()");
+			BehaviorDelegate.onBack();
+		}
+		
+		function onNextMode(){
+			LOG("Delegate","Invoking onNextMode()");
+			BehaviorDelegate.onNextMode();
+		}
+		
+		function onNextPage(){
+			LOG("Delegate","Invoking onNextPage()");
+			BehaviorDelegate.onNextPage();
+		}
+		
+		function onPreviousMode(){
+			LOG("Delegate","Invoking onPreviousMode()");
+			BehaviorDelegate.onPreviousMode();
+		}
+		
+		function onPreviousPage(){
+			LOG("Delegate","Invoking onPreviousPage()");
+			BehaviorDelegate.onPreviousPage();
+		}
+		
+		function onSelect(){
+			LOG("Delegate","Invoking onSelect()");
+			BehaviorDelegate.onSelect();
 		}
 	}
 	
@@ -38,10 +70,12 @@ module Common {
 	    }
 	    
 	    function onSelect(item) {
+	    	LOG("SettingsMenuDelegate","Invoking onSelect()");
+	    	
 	    	if(S_DATA.cfg.get(item.getId()).get(:value) instanceof Toybox.Lang.Boolean) {
 	    		S_DATA.cfg.get(item.getId()).put(:value, item.isEnabled());
 	    	}else if(S_DATA.cfg.get(item.getId()).get(:name) == Rez.Strings.interval){
-	    		WatchUi.pushView(new IntervalPicker(), new IntervalPickerDelegate(), SCREEN_TRANSITION);
+	    		LOAD("IntervalPicker", new IntervalPicker(), new IntervalPickerDelegate());
 	    	}
 		}
 	}
@@ -76,16 +110,20 @@ module Common {
 	    }
 	
 	    function onCancel() {
-	        WatchUi.popView(SCREEN_TRANSITION);
+	    	LOG("IntervalPickerDelegate","Invoking onCancel()");
+	    	
+	        UNLOAD("IntervalPicker");
 	    }
 	
 	    function onAccept(values) {
+	    	LOG("IntervalPickerDelegate","Invoking onAccept()");
+	    
 	    	var interval =  values[0]*60+values[2];
 	    	S_DATA.cfg.get(CFG.REPETITION_INTERVAL).put(:value, interval);
 	    	
-	    	LOG("Common", "Changed repetition interval period, new value:" + interval);
+	    	LOG("IntervalPickerDelegate", "Changed repetition interval period, new value:" + interval);
 	    	
-	        WatchUi.popView(SCREEN_TRANSITION);
+	        UNLOAD("IntervalPicker");
 		}
 	}
 	

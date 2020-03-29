@@ -15,6 +15,8 @@ module Exercise {
 	    }
 	    
 	    function onSelect(){
+	    	LOG("ExerciseDelegate","Invoking onSelect()");
+	    	
 			S_ACTIVITY.pause();
 			S_TIMER.pause(TIMER.REP_TIME);
 			S_NOTIFY.signal(NOTIFY.STOP);
@@ -23,6 +25,8 @@ module Exercise {
 	    }
 	    
 	    function onBack(){
+	    	LOG("ExerciseDelegate","Invoking onBack()");
+	    
 	        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value)});
 	        
 			S_NOTIFY.signal(NOTIFY.LAP);
@@ -80,7 +84,7 @@ module Exercise {
 			}
 			
 			if(!showedExerciseNumber){
-				WatchUi.pushView(exerciseNumberView, exerciseNumberDelegate, SCREEN_TRANSITION);
+				LOAD("ExerciseNumberView", exerciseNumberView, exerciseNumberDelegate);
 			}
 	 	}
 	 	
@@ -126,7 +130,7 @@ module Exercise {
 	 	}
 	 	
 	 	function exerciseNumberTimeout_callback(){
-	 		WatchUi.popView(SCREEN_TRANSITION);
+	 		UNLOAD("ExerciseNumberView");
 	 	}
 	}
 }

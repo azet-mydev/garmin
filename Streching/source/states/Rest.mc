@@ -11,6 +11,8 @@ module Rest {
 	    }
 	    
 	    function onSelect() {
+	    	LOG("RestDelegate","Invoking onSelect()");
+	    	
 			S_ACTIVITY.pause();
 			S_TIMER.pause(TIMER.REP_PAUSE_TIME);
 			S_NOTIFY.signal(NOTIFY.STOP);
@@ -19,6 +21,8 @@ module Rest {
 	    }
 	    
 	    function onBack() {
+	    	LOG("RestDelegate","Invoking onBack()");
+	    	
 			S_ACTIVITY.lap();
 			S_TIMER.remove(TIMER.REP_PAUSE_TIME);
 			S_NOTIFY.signal(NOTIFY.LAP);
