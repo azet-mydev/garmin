@@ -35,7 +35,7 @@ module Initial {
 			time.setText(S_UTILITY.formatTimeNow());
 			
 			var counter = View.findDrawableById("counter");
-			counter.setText(S_UTILITY.formatCounter(S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value)));
+			counter.setText(S_UTILITY.formatCounter(S_DATA.getRepetitionInterval()));
 			
 			var hr = View.findDrawableById("hr");
 			var info = Sensor.getInfo();

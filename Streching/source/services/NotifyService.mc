@@ -51,37 +51,37 @@ class NotifyService{
 	}
 	
 	private function vibrate(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_VIBRATION).get(:value)){
+		if(S_DATA.isVibrationOn()){
 		    Attention.vibrate(vibrateData);
 	    }
 	}
 	
 	private function stop(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_SOUND).get(:value)){
+		if(S_DATA.isSoundOn()){
 			Attention.playTone(Attention.TONE_STOP);
 		}
 	}
 	
 	private function start(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_SOUND).get(:value)){
+		if(S_DATA.isSoundOn()){
 			Attention.playTone(Attention.TONE_START);
 		}
 	}
 	
 	private function lap(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_SOUND).get(:value)){
+		if(S_DATA.isSoundOn()){
 			Attention.playTone(Attention.TONE_LAP);
 		}
 	}
 	
 	private function timeout(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_SOUND).get(:value)){
+		if(S_DATA.isSoundOn()){
 			Attention.playTone(Attention.TONE_LOUD_BEEP);
 		}
 	}
 	
 	private function blink(){
-		if(S_DATA.cfg.get(CFG.ACTIVITY_BACKLIGHT).get(:value)){
+		if(S_DATA.isBacklightOn()){
 			Attention.backlight(true);
 			if(S_TIMER.isRunning(TIMER.NOTIFY_LIGHT_OFF)){
 				S_TIMER.remove(TIMER.NOTIFY_LIGHT_OFF);

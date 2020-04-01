@@ -78,7 +78,7 @@ module Summary {
 			time.setText(S_UTILITY.formatTimeNow());
 			
 			var ex = View.findDrawableById("ex");
-			ex.setText(S_DATA.exerciseNumber + " ex");
+			ex.setText(S_DATA.getExerciseNumber() + " ex");
 						
 			var counterVal = Activity.getActivityInfo().timerTime/1000;
 			var counter = View.findDrawableById("counter");
@@ -158,7 +158,7 @@ module Summary {
 					break;
 				}
 				case 1: {
-					value = S_DATA.exerciseNumber + " ex";
+					value = S_DATA.getExerciseNumber() + " ex";
 					break;
 				}
 				case 2: {

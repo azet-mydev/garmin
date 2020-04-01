@@ -17,17 +17,11 @@ module Common {
 			LOG("Delegate","Invoking onMenu()");
 		
 			var settingsMenuView = new WatchUi.Menu2({:title=>Rez.Strings.settings});
-		    for( var i = 0; i < S_DATA.cfg.keys().size(); i += 1 ) {
-		    	var cfgKey = S_DATA.cfg.keys()[i];
-		    	var cfgName = S_DATA.cfg.get(cfgKey).get(:name);
-		    	var cfgValue = S_DATA.cfg.get(cfgKey).get(:value);
-				
-				if(cfgValue instanceof Toybox.Lang.Boolean){		    	
-		    		settingsMenuView.addItem(new ToggleMenuItem(cfgName, null, cfgKey, cfgValue, {}));
-		    	}else if (cfgValue instanceof Toybox.Lang.Number){
-		    		settingsMenuView.addItem(new MenuItem(cfgName, null, cfgKey, {}));
-		    	}
-		    }
+			settingsMenuView.addItem(new MenuItem(Rez.Strings.interval, null, "repetitionInterval", {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.sound, null, "soundOn", S_DATA.isSoundOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.vibration, null, "vibrationOn", S_DATA.isVibrationOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.backlight, null, "backlightOn", S_DATA.isBacklightOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.lap, null, "lapOn", S_DATA.isLapOn(), {}));
 		    LOAD("SettingsMenuView", settingsMenuView, settingsMenuDelegate);
 		    return true;
 		}
@@ -70,12 +64,24 @@ module Common {
 	    }
 	    
 	    function onSelect(item) {
-	    	LOG("SettingsMenuDelegate","Invoking onSelect()");
+	    	LOG("SettingsMenuDelegate","Invoking onSelect(" + item.getId() + ")");
 	    	
-	    	if(S_DATA.cfg.get(item.getId()).get(:value) instanceof Toybox.Lang.Boolean) {
-	    		S_DATA.cfg.get(item.getId()).put(:value, item.isEnabled());
-	    	}else if(S_DATA.cfg.get(item.getId()).get(:name) == Rez.Strings.interval){
-	    		LOAD("IntervalPicker", new IntervalPicker(), new IntervalPickerDelegate());
+	    	switch(item.getId()) {
+	    		case "repetitionInterval":
+	    			LOAD("IntervalPicker", new IntervalPicker(), new IntervalPickerDelegate());
+	    			break;
+	    		case "soundOn":
+	    			S_DATA.setSoundOn(item.isEnabled());
+	    			break;
+	    		case "vibrationOn":
+	    			S_DATA.setVibrationOn(item.isEnabled());
+	    			break;
+	    		case "backlightOn":
+	    			S_DATA.setBacklightOn(item.isEnabled());
+	    			break;
+	    		case "lapOn":
+	    			S_DATA.setLapOn(item.isEnabled());
+	    			break;	    				    				    				    		 
 	    	}
 		}
 	}
@@ -90,8 +96,8 @@ module Common {
 			factories[2] = new NumberPickerFactory(0, 59, 1, "%d");
 			
 			var defaults = new [factories.size()];
-			defaults[0] = (S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value) / 60).toNumber();
-			defaults[2] = S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value) % 60;
+			defaults[0] = (S_DATA.getRepetitionInterval() / 60).toNumber();
+			defaults[2] = S_DATA.getRepetitionInterval() % 60;
 			
 			Picker.initialize({:title=>title, :pattern=>factories, :defaults=>defaults});
 		}
@@ -119,7 +125,7 @@ module Common {
 	    	LOG("IntervalPickerDelegate","Invoking onAccept()");
 	    
 	    	var interval =  values[0]*60+values[2];
-	    	S_DATA.cfg.get(CFG.REPETITION_INTERVAL).put(:value, interval);
+	    	S_DATA.setRepetitionInterval(interval);
 	    	
 	    	LOG("IntervalPickerDelegate", "Changed repetition interval period, new value:" + interval);
 	    	

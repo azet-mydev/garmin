@@ -19,4 +19,5 @@
     <string id="sound">Sound</string>
     <string id="vibration">Vibration</string>
     <string id="backlight">Backlight</string>
+    <string id="repetitionInterval">Repetition Interval</string>
 </strings>

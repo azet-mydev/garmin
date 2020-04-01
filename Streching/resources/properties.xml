@@ -1,0 +1,28 @@
+<resources>
+
+    <properties>
+        <property id="repetitionInterval" type="number">10</property>
+        <property id="lapOn" type="boolean">false</property>
+        <property id="soundOn" type="boolean">false</property>
+        <property id="backlightOn" type="boolean">true</property>
+        <property id="vibrationOn" type="boolean">true</property>
+    </properties>
+
+    <settings>
+        <setting propertyKey="@Properties.repetitionInterval" title="@Strings.repetitionInterval">
+            <settingConfig type="numeric" />
+        </setting>
+        <setting propertyKey="@Properties.lapOn" title="@Strings.lap">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.soundOn" title="@Strings.sound">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.backlightOn" title="@Strings.backlight">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.vibrationOn" title="@Strings.vibration">
+        	<settingConfig type="boolean"/>
+        </setting>                
+	</settings>
+</resources>

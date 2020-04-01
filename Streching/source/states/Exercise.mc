@@ -27,7 +27,7 @@ module Exercise {
 	    function onBack(){
 	    	LOG("ExerciseDelegate","Invoking onBack()");
 	    
-	        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value)});
+	        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.getRepetitionInterval()});
 	        
 			S_NOTIFY.signal(NOTIFY.LAP);
 			return true;
@@ -61,7 +61,7 @@ module Exercise {
 			
 			dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);    	
 	    	dc.setPenWidth(10);
-			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value));
+			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/S_DATA.getRepetitionInterval());
 	 	}
 	 	
 	 	function onShow(){
@@ -77,7 +77,7 @@ module Exercise {
 					S_TIMER.resume(TIMER.REP_TIME);
 				} else {
 					S_TIMER.schedule(TIMER.REP_TIME, {
-						:period=>S_DATA.cfg.get(CFG.REPETITION_INTERVAL).get(:value),
+						:period=>S_DATA.getRepetitionInterval(),
 						:callback=>method(:repTime_callback), 
 						:repeat=>false});
 				}
@@ -115,7 +115,7 @@ module Exercise {
 	 	
 	 	function onShow(){
 	 		showedExerciseNumber = true;
-			S_DATA.exerciseNumber++; 	
+	 		S_DATA.setExerciseNumber(S_DATA.getExerciseNumber()+1);
 	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
 				:period=>EXERCISE_NUMBER_PERIOD,
 				:callback=>method(:exerciseNumberTimeout_callback), 
@@ -124,7 +124,7 @@ module Exercise {
 	 	
 	 	function onUpdate(dc){
 	 		var exerciseNumber = View.findDrawableById("exerciseNumber");
-			exerciseNumber.setText(S_DATA.exerciseNumber.toString());
+			exerciseNumber.setText(S_DATA.getExerciseNumber().toString());
 	 	
 			View.onUpdate(dc);
 	 	}
