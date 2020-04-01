@@ -67,7 +67,7 @@ module Exercise {
 	 	function onShow(){
 	 		if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
 		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-					:period=>REFRESH_PERIOD,
+					:period=>S_DATA.getRefreshPeriod(),
 					:callback=>method(:refreshView_callback), 
 					:repeat=>true});
 			}
@@ -117,7 +117,7 @@ module Exercise {
 	 		showedExerciseNumber = true;
 	 		S_DATA.setExerciseNumber(S_DATA.getExerciseNumber()+1);
 	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
-				:period=>EXERCISE_NUMBER_PERIOD,
+				:period=>S_DATA.getExerciseNumberDisappearPeriod(),
 				:callback=>method(:exerciseNumberTimeout_callback), 
 				:repeat=>false});
 	 	}

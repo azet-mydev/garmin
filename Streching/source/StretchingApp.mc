@@ -6,7 +6,7 @@ using Toybox.Lang;
 class StretchingApp extends Application.AppBase {
 	
     function initialize() {
-    	LOG("StretchingApp", "Starting application");
+    	LOG("StretchingApp", "Starting application: " + S_DATA.getAppVersion());
     	
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);
@@ -33,7 +33,7 @@ class StretchingApp extends Application.AppBase {
     function getInitialView() {
         return S_SM.transition(SM.INITIAL);
     }
-    
+
     function onSettingsChanged(){
     	LOG("StretchingApp", "Changed settings via Garmin Connect");
     }

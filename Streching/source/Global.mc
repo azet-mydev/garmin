@@ -4,6 +4,16 @@ using Toybox.System;
 using Toybox.Lang;
 using Toybox.WatchUi;
 
+
+const SCREEN_TRANSITION =  WatchUi.SLIDE_IMMEDIATE;
+
+const S_TIMER = new TimerService();
+const S_ACTIVITY = new ActivityService();
+const S_SM = new StateMachineService();
+const S_NOTIFY = new NotifyService();
+const S_UTILITY = new UtilityService();
+const S_DATA = new DataService();
+
 function LOG(name, msg){
 	var timestamp = Gregorian.info(Time.now(), Time.FORMAT_MEDIUM);
 	System.println(Lang.format(

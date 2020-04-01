@@ -1,6 +1,9 @@
 class DataService{
 	
-	//Data
+	////////////////////////////////////////////////////
+	////////////////////// DATA ////////////////////////
+	////////////////////////////////////////////////////
+	
 	var exerciseNumber = 0;
 	
 	function getExerciseNumber(){
@@ -10,6 +13,10 @@ class DataService{
 	function setExerciseNumber(value){
 		exerciseNumber = value;
 	}
+
+	////////////////////////////////////////////////////
+	////////////////////// SETTINGS ////////////////////
+	////////////////////////////////////////////////////
 	
 	function getRepetitionInterval(){
 		return Application.Properties.getValue("repetitionInterval");	
@@ -50,4 +57,36 @@ class DataService{
 	function setVibrationOn(value){
 		Application.Properties.setValue("vibrationOn", value);
 	}
+	
+	////////////////////////////////////////////////////
+	////////////////////// CONST ///////////////////////
+	////////////////////////////////////////////////////
+	function getAppVersion(){
+		return Application.Properties.getValue("appVersion");
+	}
+	
+	function getBaseTimePeriod(){
+		return Application.Properties.getValue("baseTimePeriod");
+	}
+
+	function getRefreshPeriod(){
+		return Application.Properties.getValue("refreshPeriod");
+	}
+
+	function getNotifyLightOffPeriod(){
+		return Application.Properties.getValue("notifyLightOffPeriod");
+	}
+	
+	function getSummaryMenuAppearPeriod(){
+		return Application.Properties.getValue("summaryMenuAppearPeriod");
+	}
+	
+	function getSummaryMenuTitleSlideChangePeriod(){
+		return Application.Properties.getValue("summaryMenuTitleSlideChangePeriod");
+	}
+	
+	function getExerciseNumberDisappearPeriod(){
+		return Application.Properties.getValue("exerciseNumberDisappearPeriod");
+	}					
+	
 }

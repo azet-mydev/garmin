@@ -1,5 +1,5 @@
 <menu2 id="SummaryMenu">
-    <menu-item id="Continue" label="@Strings.summenu_continue" />
-    <menu-item id="Save" label="@Strings.summenu_save" />
-    <menu-item id="Discard" label="@Strings.summenu_discard" />
+    <menu-item id="Continue" label="@Strings.Continue" />
+    <menu-item id="Save" label="@Strings.Save" />
+    <menu-item id="Discard" label="@Strings.Discard" />
 </menu2>

@@ -168,7 +168,7 @@ class TimerService {
 	
 	private function start() {
 		if(!isBaseTimerOn){
-			baseTimer.start(method(:timeOut), BASE_TIMER_PERIOD, true);
+			baseTimer.start(method(:timeOut), S_DATA.getBaseTimePeriod(), true);
 			isBaseTimerOn = true;
 		}
 	}

@@ -1,4 +1,4 @@
-<menu2 id="DiscardMenu" title="@Strings.discardMenu_areYouSure">
-	<menu-item id="No" label="@Strings.no" />
-    <menu-item id="Yes" label="@Strings.yes" />
+<menu2 id="DiscardMenu" title="@Strings.AreYouSure">
+	<menu-item id="No" label="@Strings.No" />
+    <menu-item id="Yes" label="@Strings.Yes" />
 </menu2>

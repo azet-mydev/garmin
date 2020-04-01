@@ -16,12 +16,12 @@ module Common {
 		function onMenu() {
 			LOG("Delegate","Invoking onMenu()");
 		
-			var settingsMenuView = new WatchUi.Menu2({:title=>Rez.Strings.settings});
-			settingsMenuView.addItem(new MenuItem(Rez.Strings.interval, null, "repetitionInterval", {}));
-			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.sound, null, "soundOn", S_DATA.isSoundOn(), {}));
-			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.vibration, null, "vibrationOn", S_DATA.isVibrationOn(), {}));
-			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.backlight, null, "backlightOn", S_DATA.isBacklightOn(), {}));
-			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.lap, null, "lapOn", S_DATA.isLapOn(), {}));
+			var settingsMenuView = new WatchUi.Menu2({:title=>Rez.Strings.Settings});
+			settingsMenuView.addItem(new MenuItem(Rez.Strings.Interval, null, "repetitionInterval", {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.Sound, null, "soundOn", S_DATA.isSoundOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.Vibration, null, "vibrationOn", S_DATA.isVibrationOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.Backlight, null, "backlightOn", S_DATA.isBacklightOn(), {}));
+			settingsMenuView.addItem(new ToggleMenuItem(Rez.Strings.Lap, null, "lapOn", S_DATA.isLapOn(), {}));
 		    LOAD("SettingsMenuView", settingsMenuView, settingsMenuDelegate);
 		    return true;
 		}
@@ -88,7 +88,7 @@ module Common {
 	
 	class IntervalPicker extends WatchUi.Picker {
 		function initialize() {
-			var title = new WatchUi.Text({:text=>Rez.Strings.interval, :font=>Graphics.FONT_MEDIUM, :locX=>WatchUi.LAYOUT_HALIGN_CENTER, :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM, :color=>Graphics.COLOR_WHITE});
+			var title = new WatchUi.Text({:text=>Rez.Strings.Interval, :font=>Graphics.FONT_MEDIUM, :locX=>WatchUi.LAYOUT_HALIGN_CENTER, :locY=>WatchUi.LAYOUT_VALIGN_BOTTOM, :color=>Graphics.COLOR_WHITE});
 			
 			var factories = new [3];
 			factories[0] = new NumberPickerFactory(0, 99, 1, "%2d");

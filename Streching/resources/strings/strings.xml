@@ -1,23 +1,26 @@
 <strings>
     <string id="AppName">Stretching</string>
-
-    <string id="summenu_continue">Continue</string>
-    <string id="summenu_save">Save</string>
-    <string id="summenu_discard">Discard</string>
     
-    <string id="yes">Yes</string>
-    <string id="no">No</string>
+    <string id="Exercise">Exercise</string>
     
-    <string id="discardMenu_areYouSure">Are you sure?</string>
-    <string id="discardMenu_areYouSure">Are you sure?</string>
+    <string id="Settings">Settings</string>
+    <string id="RepetitionInterval">Repetition Interval</string>
+    <string id="Interval">Interval</string>
+    <string id="Sound">Sound</string>
+    <string id="Vibration">Vibration</string>
+    <string id="Backlight">Backlight</string>
+    <string id="Lap">Lap</string>
     
-    <string id="exercise">Exercise</string>
+    <string id="Continue">Continue</string>
+    <string id="Save">Save</string>
+    <string id="Discard">Discard</string>
     
-    <string id="settings">Settings</string>
-    <string id="interval">Interval</string>
-    <string id="lap">Lap</string>
-    <string id="sound">Sound</string>
-    <string id="vibration">Vibration</string>
-    <string id="backlight">Backlight</string>
-    <string id="repetitionInterval">Repetition Interval</string>
+    <string id="AreYouSure">Are you sure?</string>
+    <string id="Yes">Yes</string>
+    <string id="No">No</string>
+    
+    <string id="Ex">ex</string>
+    <string id="Bps">bps</string>
+    <string id="Cal">cal</string>
+    
 </strings>

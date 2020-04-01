@@ -1,6 +1,14 @@
 <resources>
 
     <properties>
+        <property id="appVersion" type="string">Stretching_v1.0.0</property>
+        <property id="baseTimePeriod" type="number">1000</property>
+        <property id="refreshPeriod" type="number">1</property>
+        <property id="notifyLightOffPeriod" type="number">5</property>
+        <property id="summaryMenuAppearPeriod" type="number">2</property>
+        <property id="summaryMenuTitleSlideChangePeriod" type="number">3</property>
+        <property id="exerciseNumberDisappearPeriod" type="number">2</property>
+        
         <property id="repetitionInterval" type="number">10</property>
         <property id="lapOn" type="boolean">false</property>
         <property id="soundOn" type="boolean">false</property>
@@ -9,19 +17,19 @@
     </properties>
 
     <settings>
-        <setting propertyKey="@Properties.repetitionInterval" title="@Strings.repetitionInterval">
+        <setting propertyKey="@Properties.repetitionInterval" title="@Strings.RepetitionInterval">
             <settingConfig type="numeric" />
         </setting>
-        <setting propertyKey="@Properties.lapOn" title="@Strings.lap">
+        <setting propertyKey="@Properties.lapOn" title="@Strings.Lap">
         	<settingConfig type="boolean"/>
         </setting>
-        <setting propertyKey="@Properties.soundOn" title="@Strings.sound">
+        <setting propertyKey="@Properties.soundOn" title="@Strings.Sound">
         	<settingConfig type="boolean"/>
         </setting>
-        <setting propertyKey="@Properties.backlightOn" title="@Strings.backlight">
+        <setting propertyKey="@Properties.backlightOn" title="@Strings.Backlight">
         	<settingConfig type="boolean"/>
         </setting>
-        <setting propertyKey="@Properties.vibrationOn" title="@Strings.vibration">
+        <setting propertyKey="@Properties.vibrationOn" title="@Strings.Vibration">
         	<settingConfig type="boolean"/>
         </setting>                
 	</settings>

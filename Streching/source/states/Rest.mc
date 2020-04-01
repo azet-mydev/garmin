@@ -58,7 +58,7 @@ module Rest {
 	 	function onShow(){
 	 		 if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
 		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-					:period=>REFRESH_PERIOD,
+					:period=>S_DATA.getRefreshPeriod(),
 					:callback=>method(:refreshView_callback), 
 					:repeat=>true});
 			}

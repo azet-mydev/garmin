@@ -1,13 +1,14 @@
 using Toybox.ActivityRecording;
+using Toybox.WatchUi;
 
 class ActivityService
 {
 	var session = null;
 	
 	function start(){
-        session = ActivityRecording.createSession({:name=>ACTIVITY_NAME,
-        										:sport=>ACTIVITY_SPORT,
-        										:subSport=>ACTIVITY_SUB_SPORT});
+        session = ActivityRecording.createSession({:name=>WatchUi.loadResource( Rez.Strings.AppName ),
+        										:sport=>ActivityRecording.SPORT_TRAINING,
+        										:subSport=>ActivityRecording.SUB_SPORT_FLEXIBILITY_TRAINING});
         session.start();
 	}
 	

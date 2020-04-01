@@ -53,13 +53,13 @@ module Summary {
 	 	
 		function onShow(){
 			S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-				:period=>REFRESH_PERIOD,
+				:period=>S_DATA.getRefreshPeriod(),
 				:callback=>method(:refreshView_callback), 
 				:repeat=>true});
 				
 			if(!showedSummaryMenu){
 				S_TIMER.schedule(TIMER.SUMMENU_APPEAR, {
-					:period => SUMMENU_APPEAR_PERIOD,
+					:period => S_DATA.getSummaryMenuAppearPeriod(),
 					:callback => method(:showSummaryMenu),
 					:repeat => false});
 			}
@@ -78,17 +78,17 @@ module Summary {
 			time.setText(S_UTILITY.formatTimeNow());
 			
 			var ex = View.findDrawableById("ex");
-			ex.setText(S_DATA.getExerciseNumber() + " ex");
+			ex.setText(S_UTILITY.formatNullableData2(S_DATA.getExerciseNumber(), WatchUi.loadResource( Rez.Strings.Ex )));
 						
 			var counterVal = Activity.getActivityInfo().timerTime/1000;
 			var counter = View.findDrawableById("counter");
 			counter.setText(S_UTILITY.formatCounter(counterVal));
 			
 			var hr = View.findDrawableById("hr");
-			hr.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, " bps"));
+			hr.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, WatchUi.loadResource( Rez.Strings.Bps )));
 			
 			var calories = View.findDrawableById("calories");
-			calories.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, " C"));
+			calories.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, WatchUi.loadResource( Rez.Strings.Cal )));
 			
 			View.onUpdate(dc);
 		}
@@ -137,7 +137,7 @@ module Summary {
 			showMenuTitleIndex = 0;
 			
 			S_TIMER.schedule(TIMER.SUMMMENU_TITLE_CHANGE, {
-				:period => SUMMMENU_TITLE_CHANGE_PERIOD,
+				:period => S_DATA.getSummaryMenuTitleSlideChangePeriod(),
 				:callback => method(:rollOverMenuTitile),
 				:repeat => true});
 			rollOverMenuTitile();
@@ -158,15 +158,15 @@ module Summary {
 					break;
 				}
 				case 1: {
-					value = S_DATA.getExerciseNumber() + " ex";
+					value = S_UTILITY.formatNullableData2(S_DATA.getExerciseNumber(), WatchUi.loadResource( Rez.Strings.Ex ));
 					break;
 				}
 				case 2: {
-					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, " C");
+					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, WatchUi.loadResource( Rez.Strings.Cal ));
 					break;
 				}
 				case 3: {
-					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, " bps");
+					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, WatchUi.loadResource( Rez.Strings.Bps ));
 					break;
 				}
 			}

@@ -87,7 +87,7 @@ class NotifyService{
 				S_TIMER.remove(TIMER.NOTIFY_LIGHT_OFF);
 			}
 			S_TIMER.schedule(TIMER.NOTIFY_LIGHT_OFF, {
-				:period => NOTIFY_LIGHT_OFF_PERIOD,
+				:period => S_DATA.getNotifyLightOffPeriod(),
 				:callback => method(:notifyLightOff_callback),
 				:repeat => false});	
 		}

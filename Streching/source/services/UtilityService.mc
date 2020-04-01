@@ -27,6 +27,6 @@ class UtilityService{
 	}
 	
 	function formatNullableData2(value, suffix){
-		return formatNullableData(value)+suffix;
+		return formatNullableData(value)+ " " + suffix;
 	}
 }
