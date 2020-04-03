@@ -9,7 +9,7 @@
         <property id="summaryMenuTitleSlideChangePeriod" type="number">3</property>
         <property id="exerciseNumberDisappearPeriod" type="number">2</property>
         
-        <property id="repetitionInterval" type="number">10</property>
+        <property id="repetitionInterval" type="number">90</property>
         <property id="lapOn" type="boolean">false</property>
         <property id="soundOn" type="boolean">false</property>
         <property id="backlightOn" type="boolean">true</property>
