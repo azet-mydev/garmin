@@ -4,6 +4,8 @@ module Summary {
 
 	var summaryMenuDelegate;
 	var summaryMenuView;
+	var summaryMenuTitle;
+	
 	var discardDialogDelegate;
 	var discardDialogView;
 	
@@ -128,6 +130,7 @@ module Summary {
 	
 		function initialize(){
 			Rez.Menus.SummaryMenu.initialize();
+			Menu2.initialize({:title=>new SummaryMenuTitleDrawable()});
 		}
 		
 		function onShow(){
@@ -172,11 +175,23 @@ module Summary {
 			}
 			showMenuTitleIndex++;
 			
-			self.setTitle(value);
+			summaryMenuTitle = value;
 			WatchUi.requestUpdate();
 		}
 	}
+
+	class SummaryMenuTitleDrawable extends WatchUi.Drawable {
+
+	    function initialize() {
+	        Drawable.initialize({});
+	    }
 	
+	    function draw(dc) {
+	    	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
+	        dc.drawText(dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_MEDIUM, summaryMenuTitle, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
+	    }
+	}
+		
 	class DiscardDialogDelegate extends WatchUi.Menu2InputDelegate {
 	
 	   	function initialize() {
