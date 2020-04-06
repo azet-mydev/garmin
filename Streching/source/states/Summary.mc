@@ -1,6 +1,46 @@
 using Toybox.WatchUi;
+using Toybox.System;
+using Toybox.Lang;
 
 module Summary {
+
+	////////////////////////////////////////////////////
+	////////////////////// SIGNALS /////////////////////
+	////////////////////////////////////////////////////
+	
+	function signal_Summary_unpause(){
+		LOG("Summary","signal_Summary_unpause()");
+    	S_ACTIVITY.resume();
+        S_NOTIFY.signal(NOTIFY.START);
+        showedSummaryMenu = false;
+        
+        var prevState = S_SM.getHistory(-1);
+        
+        if(prevState==SM.EXERCISE){
+			S_DATA.addPauseTime(S_TIMER.remove(TIMER.PAUSE_TIME));
+			S_TIMER.schedule(TIMER.EXERCISE_TIME, {:callback=>new Lang.Method(Common, :reportExcercise)});
+        }else if(prevState==SM.REST){
+			S_DATA.addPauseTime(S_TIMER.remove(TIMER.PAUSE_TIME));
+			S_TIMER.schedule(TIMER.REST_TIME, {:callback=>new Lang.Method(Common, :reportRest)});
+        }
+        
+        S_SM.transition(prevState);	
+	}
+	
+	function signal_Summary_saveActivity(){
+		LOG("Summary","signal_Summary_saveActivity()");
+		
+		S_DATA.addPauseTime(S_TIMER.remove(TIMER.PAUSE_TIME));
+		S_DATA.writeToActivity();
+		
+		S_ACTIVITY.stop();
+    	S_NOTIFY.signal(NOTIFY.STOP);
+    	System.exit();
+	}
+
+	////////////////////////////////////////////////////
+	////////////////////// \SIGNALS ////////////////////
+	////////////////////////////////////////////////////	
 
 	var summaryMenuDelegate;
 	var summaryMenuView;
@@ -10,34 +50,6 @@ module Summary {
 	var discardDialogView;
 	
 	var showedSummaryMenu = false;
-	
-	function showSummaryMenu(){
-		LOAD("SummaryMenuView", summaryMenuView, summaryMenuDelegate);
-	}
-	
-	class SummaryDelegate extends Common.Delegate {
-	
-		function initialize(){
-	        Delegate.initialize();
-	    }
-	    
-	    function onSelect(){
-	    	LOG("SummaryDelegate","Invoking onSelect()");
-	    	
-	    	S_ACTIVITY.resume();
-	        S_NOTIFY.signal(NOTIFY.START);
-	        showedSummaryMenu = false;
-	        S_SM.transition(S_SM.getHistory(-1));
-	        return true;
-	    }
-	    
-	    function onBack(){
-	    	LOG("SummaryDelegate","Invoking onBack()");
-	    	
-	    	showSummaryMenu();
-	    	return true;
-	    }
-	}
 	 
 	class SummaryView extends WatchUi.View {
 	 	
@@ -80,7 +92,7 @@ module Summary {
 			time.setText(S_UTILITY.formatTimeNow());
 			
 			var ex = View.findDrawableById("ex");
-			ex.setText(S_UTILITY.formatNullableData2(S_DATA.getExerciseNumber(), WatchUi.loadResource( Rez.Strings.Ex )));
+			ex.setText(S_UTILITY.formatNullableData2(S_DATA.getExercise(), WatchUi.loadResource( Rez.Strings.Rep )));
 						
 			var counterVal = Activity.getActivityInfo().timerTime/1000;
 			var counter = View.findDrawableById("counter");
@@ -96,31 +108,24 @@ module Summary {
 		}
 	}
 	
-	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate {
+	class SummaryDelegate extends Common.Delegate {
 	
-	    function initialize() {
-	        Menu2InputDelegate.initialize();
+		function initialize(){
+	        Delegate.initialize();
 	    }
 	    
-	    function onSelect(item) {
-	        if (item.getId() == :Continue){
-	        	LOG("SummaryMenuDelegate","Invoking onSelect(Continue)");
-	        	
-	            S_ACTIVITY.resume();
-	            S_NOTIFY.signal(NOTIFY.START);
-	            showedSummaryMenu = false;
-	            S_SM.transition(S_SM.getHistory(-1));
-	        } else if (item.getId() == :Save){
-	        	LOG("SummaryMenuDelegate","Invoking onSelect(Save)");
-	        	
-	            S_ACTIVITY.stop();
-	        	S_NOTIFY.signal(NOTIFY.STOP);
-	        	System.exit();
-	        } else if (item.getId() == :Discard){
-	        	LOG("SummaryMenuDelegate","Invoking onSelect(Discard)");
-	        	
-				LOAD("DiscardDialogView", discardDialogView, discardDialogDelegate);
-	        }
+	    function onSelect(){
+	    	LOG("Summary","onSelect()");
+	    	
+			signal_Summary_unpause();
+	        return true;
+	    }
+	    
+	    function onBack(){
+			LOG("Summary","onBack()");
+    	
+    		showSummaryMenu();	
+	    	return true;
 	    }
 	}
 	
@@ -161,7 +166,7 @@ module Summary {
 					break;
 				}
 				case 1: {
-					value = S_UTILITY.formatNullableData2(S_DATA.getExerciseNumber(), WatchUi.loadResource( Rez.Strings.Ex ));
+					value = S_UTILITY.formatNullableData2(S_DATA.getExercise(), WatchUi.loadResource( Rez.Strings.Rep ));
 					break;
 				}
 				case 2: {
@@ -179,7 +184,7 @@ module Summary {
 			WatchUi.requestUpdate();
 		}
 	}
-
+	
 	class SummaryMenuTitleDrawable extends WatchUi.Drawable {
 
 	    function initialize() {
@@ -191,6 +196,31 @@ module Summary {
 	        dc.drawText(dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_MEDIUM, summaryMenuTitle, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 	    }
 	}
+	
+	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate {
+	
+	    function initialize() {
+	        Menu2InputDelegate.initialize();
+	    }
+	    
+	    function onSelect(item) {
+	        if (item.getId() == :Continue){
+	        	LOG("Summary","SummaryMenuDelegate.onSelect(Continue)");
+				signal_Summary_unpause();
+	        } else if (item.getId() == :Save){
+	        	LOG("Summary","SummaryMenuDelegate.onSelect(Save)");
+				signal_Summary_saveActivity();
+	        } else if (item.getId() == :Discard){
+	        	LOG("Summary","SummaryMenuDelegate.onSelect(Discard)");
+	        	
+				LOAD("DiscardDialogView", discardDialogView, discardDialogDelegate);
+	        }
+	    }
+	}
+	
+	function showSummaryMenu(){
+		LOAD("SummaryMenuView", summaryMenuView, summaryMenuDelegate);
+	}		
 		
 	class DiscardDialogDelegate extends WatchUi.Menu2InputDelegate {
 	
@@ -200,13 +230,13 @@ module Summary {
 	    
 	    function onSelect(item) {
 	        if (item.getId() == :Yes){
-	        	LOG("DiscardDialogDelegate","Invoking onSelect(Yes)");
+	        	LOG("Summary","DiscardDialogDelegate.onSelect(Yes)");
 	        	
 	        	S_ACTIVITY.discard();
 	        	S_NOTIFY.signal(NOTIFY.STOP);
 	        	System.exit();
 	        } else if(item.getId() == :No){
-	        	LOG("DiscardDialogDelegate","Invoking onSelect(No)");
+	        	LOG("Summary","DiscardDialogDelegate.onSelect(No)");
 	        	
 	        	UNLOAD("DiscardDialogView");
 	        }

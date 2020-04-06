@@ -1,0 +1,59 @@
+<resources>
+    <fitContributions>
+        <fitField id="0"
+        displayInChart="true"
+        displayInActivityLaps="false"
+        displayInActivitySummary="false"
+        sortOrder="0"
+        precision="0"
+        chartTitle="@Strings.ActivityTimeline"        
+        dataLabel="@Strings.ActivityTimeline"
+        unitLabel="@Strings.Blank"
+        fillColor="#FFA500"/>
+        
+        <fitField id="1"
+        displayInChart="false"
+        displayInActivityLaps="false"
+        displayInActivitySummary="true"
+        sortOrder="1"
+        precision="0"
+        dataLabel="@Strings.NumberOfExercises"
+        unitLabel="@Strings.Rep"/>
+
+        <fitField id="2"
+        displayInChart="false"
+        displayInActivityLaps="false"
+        displayInActivitySummary="true"
+        sortOrder="2"
+        precision="0"
+        dataLabel="@Strings.ActivityTime"
+        unitLabel="@Strings.Min"/>
+
+        <fitField id="3"
+        displayInChart="false"
+        displayInActivityLaps="false"
+        displayInActivitySummary="true"
+        sortOrder="3"
+        precision="0"
+        dataLabel="@Strings.ExerciseTime"
+        unitLabel="@Strings.Min"/>
+        
+        <fitField id="4"
+        displayInChart="false"
+        displayInActivityLaps="false"
+        displayInActivitySummary="true"
+        sortOrder="4"
+        precision="0"
+        dataLabel="@Strings.RestTime"
+        unitLabel="@Strings.Min"/>
+        
+        <fitField id="5"
+        displayInChart="false"
+        displayInActivityLaps="false"
+        displayInActivitySummary="true"
+        sortOrder="5"
+        precision="0"
+        dataLabel="@Strings.PauseTime"
+        unitLabel="@Strings.Min"/>        
+    </fitContributions>
+</resources>

@@ -19,8 +19,17 @@
     <string id="Yes">Yes</string>
     <string id="No">No</string>
     
-    <string id="Ex">ex</string>
+    <string id="Rep">rep</string>
     <string id="Bps">bps</string>
     <string id="Cal">cal</string>
+    <string id="Min">min</string>
     
+    <string id="ActivityTimeline">Activity Timeline</string>
+    <string id="NumberOfExercises">Number of Exercises</string>
+    <string id="ActivityTime">Activity Time</string>
+    <string id="ExerciseTime">Exercise Time</string>
+    <string id="RestTime">Rest Time</string>
+    <string id="PauseTime">Pause Time</string>
+    
+    <string id="Blank"></string>        
 </strings>

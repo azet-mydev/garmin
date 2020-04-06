@@ -54,7 +54,6 @@ class StateMachineService {
 		var delegate = config.get(newState).get(:delegate);
 		
 		LOG("StateMachineService", "State transition: " + SM.toString(getHistory(-1)) + "->" + SM.toString(newState));
-		
 		WatchUi.switchToView(view, delegate, SCREEN_TRANSITION);
 		
 		return [view, delegate];

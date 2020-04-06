@@ -5,6 +5,18 @@ using Toybox.WatchUi;
 
 module Common {
 
+	function reportExcercise(){
+		S_ACTIVITY.reportActivityTimeline(1);
+	}
+	
+	function reportRest(){
+		S_ACTIVITY.reportActivityTimeline(0);
+	}
+	
+	function reportPause(){
+		S_ACTIVITY.reportActivityTimeline(0);
+	}	
+
 	class Delegate extends WatchUi.BehaviorDelegate {
 	
 		var settingsMenuDelegate = new SettingsMenuDelegate();

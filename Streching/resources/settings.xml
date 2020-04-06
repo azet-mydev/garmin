@@ -1,0 +1,19 @@
+<resources>
+    <settings>
+        <setting propertyKey="@Properties.repetitionInterval" title="@Strings.RepetitionInterval">
+            <settingConfig type="numeric" />
+        </setting>
+        <setting propertyKey="@Properties.lapOn" title="@Strings.Lap">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.soundOn" title="@Strings.Sound">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.backlightOn" title="@Strings.Backlight">
+        	<settingConfig type="boolean"/>
+        </setting>
+        <setting propertyKey="@Properties.vibrationOn" title="@Strings.Vibration">
+        	<settingConfig type="boolean"/>
+        </setting>                
+	</settings>
+</resources>

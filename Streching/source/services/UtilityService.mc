@@ -5,7 +5,7 @@ using Toybox.Sensor;
 class UtilityService{
 
 	function formatCounter(counter){
-		var counterMins = counter/60.toNumber();
+		var counterMins = (counter/60).toNumber();
         var counterSecs = counter % 60;  
 		return Lang.format("$1$:$2$", [counterMins, counterSecs.format("%02d")]);
 	}

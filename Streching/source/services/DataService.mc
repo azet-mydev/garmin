@@ -3,17 +3,44 @@ class DataService{
 	////////////////////////////////////////////////////
 	////////////////////// DATA ////////////////////////
 	////////////////////////////////////////////////////
-	
-	var exerciseNumber = 0;
-	
-	function getExerciseNumber(){
-		return exerciseNumber;
-	}
-	
-	function setExerciseNumber(value){
-		exerciseNumber = value;
-	}
 
+	var exercise = 0;
+	var exerciseTime = 0;
+	var restTime = 0;
+	var pauseTime = 0;
+	
+	function addExercise(){
+		exercise++;
+	}
+	
+	function getExercise(){
+		return exercise;
+	}
+	
+	function addExerciseTime(value){
+		exerciseTime = exerciseTime + value;
+	}
+	
+	function addRestTime(value){
+		restTime = restTime + value;
+	}
+	
+	function addPauseTime(value){
+		pauseTime = pauseTime + value;
+	}
+	
+	function writeToActivity(){
+		LOG("DataService", "Re-writing data to fit file");
+		
+		S_ACTIVITY.reportNumberOfExercises(exercise.toString());
+		S_ACTIVITY.reportActivityTime(S_UTILITY.formatCounter(exerciseTime + restTime + pauseTime).substring(0, 7));
+		S_ACTIVITY.reportExerciseTime(S_UTILITY.formatCounter(exerciseTime).substring(0, 7));
+		S_ACTIVITY.reportRestTime(S_UTILITY.formatCounter(restTime).substring(0, 7));
+		S_ACTIVITY.reportPauseTime(S_UTILITY.formatCounter(pauseTime).substring(0, 7));
+		
+		LOG("DataService", "Shut down, done!");
+	}
+	
 	////////////////////////////////////////////////////
 	////////////////////// SETTINGS ////////////////////
 	////////////////////////////////////////////////////
@@ -61,6 +88,7 @@ class DataService{
 	////////////////////////////////////////////////////
 	////////////////////// CONST ///////////////////////
 	////////////////////////////////////////////////////
+	
 	function getAppVersion(){
 		return Application.Properties.getValue("appVersion");
 	}
@@ -87,6 +115,6 @@ class DataService{
 	
 	function getExerciseNumberDisappearPeriod(){
 		return Application.Properties.getValue("exerciseNumberDisappearPeriod");
-	}					
+	}
 	
 }

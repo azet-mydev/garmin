@@ -1,7 +1,27 @@
 using Toybox.WatchUi;
 using Toybox.Sensor;
+using Toybox.Lang;
 
 module Initial {
+
+	////////////////////////////////////////////////////
+	////////////////////// SIGNALS /////////////////////
+	////////////////////////////////////////////////////
+	
+	function signal_Initial_start(){
+    	LOG("Initial","signal_Initial_start()");
+    	
+	        S_ACTIVITY.start();
+	        S_NOTIFY.signal(NOTIFY.START);
+	        
+	        S_TIMER.schedule(TIMER.EXERCISE_TIME, {:callback=>new Lang.Method(Common, :reportExcercise)});
+	        
+	        S_SM.transition(SM.EXERCISE);	
+	}
+
+	////////////////////////////////////////////////////
+	////////////////////// \SIGNALS ////////////////////
+	////////////////////////////////////////////////////
 	
 	class InitialDelegate extends Common.Delegate {
 	
@@ -10,17 +30,15 @@ module Initial {
 	    }
 	    
 	    function onSelect() {
-	    	LOG("InitialDelegate","Invoking onSelect()");
+	    	LOG("Initial","InitialDelegate.onSelect()");
 	        
-	        S_ACTIVITY.start();
-	        S_NOTIFY.signal(NOTIFY.START);
-	        S_SM.transition(SM.EXERCISE);
+	        signal_Initial_start();
 	        return true;
 	    }
 	}
 	
 	class InitialView extends WatchUi.View {
-	 	
+
 		function initialize(){
 	 		View.initialize();
 	 	}

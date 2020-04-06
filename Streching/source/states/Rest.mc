@@ -1,37 +1,45 @@
 using Toybox.WatchUi;
 using Toybox.Time;
 using Toybox.Time.Gregorian;
+using Toybox.Lang;
 
 module Rest {
+
+	////////////////////////////////////////////////////
+	////////////////////// SIGNALS /////////////////////
+	////////////////////////////////////////////////////
 	
-	class RestDelegate extends Common.Delegate {
-	
-		function initialize() {
-	        Delegate.initialize();
-	    }
-	    
-	    function onSelect() {
-	    	LOG("RestDelegate","Invoking onSelect()");
-	    	
-			S_ACTIVITY.pause();
-			S_TIMER.pause(TIMER.REP_PAUSE_TIME);
-			S_NOTIFY.signal(NOTIFY.STOP);
-	        S_SM.transition(SM.SUMMARY);
-	        return true;
-	    }
-	    
-	    function onBack() {
-	    	LOG("RestDelegate","Invoking onBack()");
-	    	
-			S_ACTIVITY.lap();
-			S_TIMER.remove(TIMER.REP_PAUSE_TIME);
-			S_NOTIFY.signal(NOTIFY.LAP);
-			S_SM.transition(SM.EXERCISE);
-			return true;
-	    } 
+	function signal_Rest_pause(){
+    	LOG("Rest","signal_Rest_pause()");
+    	
+		S_ACTIVITY.pause();
+		S_TIMER.pause(TIMER.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NOTIFY.STOP);
+		
+		S_DATA.addRestTime(S_TIMER.remove(TIMER.REST_TIME));
+		S_TIMER.schedule(TIMER.PAUSE_TIME, {:callback=>new Lang.Method(Common, :reportPause)});
+		
+        S_SM.transition(SM.SUMMARY);		
 	}
 	
-	class RestView extends WatchUi.View {
+	function signal_Rest_nextExercise(){
+	    LOG("Rest","signal_Rest_nextExercise()");
+    	
+		S_ACTIVITY.lap();
+		S_TIMER.remove(TIMER.REP_PAUSE_TIME);
+		S_NOTIFY.signal(NOTIFY.LAP);
+		
+		S_DATA.addRestTime(S_TIMER.remove(TIMER.REST_TIME));
+		S_TIMER.schedule(TIMER.EXERCISE_TIME, {:callback=>new Lang.Method(Common, :reportExcercise)});
+		
+		S_SM.transition(SM.EXERCISE);
+	}
+
+	////////////////////////////////////////////////////
+	////////////////////// \SIGNALS ////////////////////
+	////////////////////////////////////////////////////	
+	
+	class RestView extends WatchUi.View{
 	
 		function initialize(){
 	 		View.initialize();
@@ -80,4 +88,23 @@ module Rest {
 			WatchUi.requestUpdate();
 		}
 	}
+	
+	class RestDelegate extends Common.Delegate {
+	
+		function initialize() {
+	        Delegate.initialize();
+	    }
+	    
+	    function onSelect() {
+	    	LOG("Rest","onSelect()");
+			signal_Rest_pause();			
+	        return true;
+	    }
+	    
+	    function onBack() {
+	    	LOG("Rest","onBack()");
+			signal_Rest_nextExercise();
+			return true;
+	    } 
+	}	
 }

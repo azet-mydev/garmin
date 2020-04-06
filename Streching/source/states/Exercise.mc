@@ -1,38 +1,54 @@
 using Toybox.WatchUi;
 using Toybox.Graphics;
+using Toybox.Lang;
 
 module Exercise {
+	
+	////////////////////////////////////////////////////
+	////////////////////// SIGNALS /////////////////////
+	////////////////////////////////////////////////////
+	
+	function signal_Exercise_pause(){
+    	LOG("Exercise","signal_Exercise_pause()");
+    	
+		S_ACTIVITY.pause();
+		S_TIMER.pause(TIMER.REP_TIME);
+		S_NOTIFY.signal(NOTIFY.STOP);
+		
+		S_DATA.addExerciseTime(S_TIMER.remove(TIMER.EXERCISE_TIME));
+		S_TIMER.schedule(TIMER.PAUSE_TIME, {:callback=>new Lang.Method(Common, :reportPause)});
+		
+        S_SM.transition(SM.SUMMARY);		
+	}
+	
+	function signal_Exercise_reset(){
+    	LOG("Exercise","signal_Exercise_reset()");
+    
+        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.getRepetitionInterval()});
+        
+		S_NOTIFY.signal(NOTIFY.LAP);		
+	}
+	
+	function signal_Exercise_goRest(){
+    	LOG("Exercise","signal_Exercise_goRest()");
+    	
+ 		showedExerciseNumber = false;
+		S_NOTIFY.signal(NOTIFY.TIMEOUT);
+		
+		S_DATA.addExerciseTime(S_TIMER.remove(TIMER.EXERCISE_TIME));
+		S_TIMER.schedule(TIMER.REST_TIME, {:callback=>new Lang.Method(Common, :reportRest)});
+		
+		S_SM.transition(SM.REST);	
+	}
 
+	////////////////////////////////////////////////////
+	////////////////////// \SIGNALS ////////////////////
+	////////////////////////////////////////////////////
+	
 	var exerciseNumberView;
 	var exerciseNumberDelegate;
 	
 	var showedExerciseNumber = false;
-
-	class ExerciseDelegate extends Common.Delegate {
-	
-		function initialize(){
-	        Delegate.initialize();
-	    }
-	    
-	    function onSelect(){
-	    	LOG("ExerciseDelegate","Invoking onSelect()");
-	    	
-			S_ACTIVITY.pause();
-			S_TIMER.pause(TIMER.REP_TIME);
-			S_NOTIFY.signal(NOTIFY.STOP);
-	        S_SM.transition(SM.SUMMARY);
-	        return true;
-	    }
-	    
-	    function onBack(){
-	    	LOG("ExerciseDelegate","Invoking onBack()");
-	    
-	        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.getRepetitionInterval()});
-	        
-			S_NOTIFY.signal(NOTIFY.LAP);
-			return true;
-	    }
-	}
 	
 	class ExerciseView extends WatchUi.View {
 	
@@ -78,7 +94,7 @@ module Exercise {
 				} else {
 					S_TIMER.schedule(TIMER.REP_TIME, {
 						:period=>S_DATA.getRepetitionInterval(),
-						:callback=>method(:repTime_callback), 
+						:callback=>method(:signal_Exercise_goRest), 
 						:repeat=>false});
 				}
 			}
@@ -92,15 +108,28 @@ module Exercise {
 	 		S_TIMER.remove(TIMER.REFRESH_VIEW);
 	 	}
 	 	
-	 	function repTime_callback() {
-	 		showedExerciseNumber = false;
-			S_NOTIFY.signal(NOTIFY.TIMEOUT);
-			S_SM.transition(SM.REST);
-		}
-		
 		function refreshView_callback() {
 			WatchUi.requestUpdate();
 		} 
+	}
+	
+	class ExerciseDelegate extends Common.Delegate {
+	
+		function initialize(){
+	        Delegate.initialize();
+	    }
+	    
+	    function onSelect(){
+	    	LOG("Exercise","onSelect()");
+			signal_Exercise_pause();
+	        return true;
+	    }
+	    
+	    function onBack(){
+	    	LOG("Exercise","signal_Exercise_reset()");
+			signal_Exercise_reset();
+			return true;
+	    }
 	}
 	
 	class ExerciseNumberView extends WatchUi.View {
@@ -115,7 +144,7 @@ module Exercise {
 	 	
 	 	function onShow(){
 	 		showedExerciseNumber = true;
-	 		S_DATA.setExerciseNumber(S_DATA.getExerciseNumber()+1);
+	 		S_DATA.addExercise();
 	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
 				:period=>S_DATA.getExerciseNumberDisappearPeriod(),
 				:callback=>method(:exerciseNumberTimeout_callback), 
@@ -124,7 +153,7 @@ module Exercise {
 	 	
 	 	function onUpdate(dc){
 	 		var exerciseNumber = View.findDrawableById("exerciseNumber");
-			exerciseNumber.setText(S_DATA.getExerciseNumber().toString());
+			exerciseNumber.setText(S_DATA.getExercise().toString());
 	 	
 			View.onUpdate(dc);
 	 	}

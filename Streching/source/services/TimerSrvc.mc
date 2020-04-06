@@ -9,7 +9,10 @@ class TIMER {
 		NOTIFY_LIGHT_OFF,
 		SUMMENU_APPEAR,
 		SUMMMENU_TITLE_CHANGE,
-		EXERCISE_NUMBER
+		EXERCISE_NUMBER,
+		EXERCISE_TIME,
+		REST_TIME,
+		PAUSE_TIME
 	}
 	
 	function toString(name){
@@ -28,6 +31,12 @@ class TIMER {
 				return "SUMMMENU_TITLE_CHANGE";
 			case TIMER.EXERCISE_NUMBER:
 				return "EXERCISE_NUMBER";
+			case TIMER.EXERCISE_TIME:
+				return "EXERCISE_TIME";
+			case TIMER.REST_TIME:
+				return "REST_TIME";
+			case TIMER.PAUSE_TIME:
+				return "PAUSE_TIME";												
 		}
 	}
 }
@@ -52,11 +61,13 @@ class TimerService {
 	}
 	
 	function remove(name){
+		var counter = timers.get(name).get(:counter);
 		timers.remove(name);
 		
 		LOG("TimerService", "Removing timer:" + TIMER.toString(name));
 		
-		stop();		
+		stop();
+		return counter;		
 	}
 	
 	function pause(name){
@@ -127,7 +138,7 @@ class TimerService {
 		baseTimer.stop();
 		baseTimer = null;
 		
-		LOG("TimerService", "Timer service shut down");
+		LOG("TimerService", "Shut down, done!");
 	}
 	
 ////////////////////////////////////////////////////
@@ -145,13 +156,12 @@ class TimerService {
 			var name = timers.keys()[i];
 			var counter = timers.get(name).get(:counter);
 			var period = timers.get(name).get(:period);
+			var callback = timers.get(name).get(:callback);
+			var repeat = timers.get(name).get(:repeat);
 			
 			counter++;
 			
 			if(counter==period){
-				var repeat = timers.get(name).get(:repeat);
-				var callback = timers.get(name).get(:callback);
-				
 				if (callback!=null){
 					callback.invoke();
 				}
@@ -162,6 +172,9 @@ class TimerService {
 				}
 			}else {
 				timers.get(name).put(:counter, counter);
+				if (period==null and callback!=null){
+					callback.invoke();
+				}
 			}
 		}
 	}
