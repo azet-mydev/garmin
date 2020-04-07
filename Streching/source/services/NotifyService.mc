@@ -1,6 +1,6 @@
 using Toybox.Attention;
 
-class NOTIFY {
+class NOTIFY{
 	enum {
 		START, 
 		STOP,
@@ -51,43 +51,43 @@ class NotifyService{
 	}
 	
 	private function vibrate(){
-		if(S_DATA.isVibrationOn()){
+		if(S_CONFIG.isVibrationOn()){
 		    Attention.vibrate(vibrateData);
 	    }
 	}
 	
 	private function stop(){
-		if(S_DATA.isSoundOn()){
+		if(S_CONFIG.isSoundOn()){
 			Attention.playTone(Attention.TONE_STOP);
 		}
 	}
 	
 	private function start(){
-		if(S_DATA.isSoundOn()){
+		if(S_CONFIG.isSoundOn()){
 			Attention.playTone(Attention.TONE_START);
 		}
 	}
 	
 	private function lap(){
-		if(S_DATA.isSoundOn()){
+		if(S_CONFIG.isSoundOn()){
 			Attention.playTone(Attention.TONE_LAP);
 		}
 	}
 	
 	private function timeout(){
-		if(S_DATA.isSoundOn()){
+		if(S_CONFIG.isSoundOn()){
 			Attention.playTone(Attention.TONE_LOUD_BEEP);
 		}
 	}
 	
 	private function blink(){
-		if(S_DATA.isBacklightOn()){
+		if(S_CONFIG.isBacklightOn()){
 			Attention.backlight(true);
 			if(S_TIMER.isRunning(TIMER.NOTIFY_LIGHT_OFF)){
 				S_TIMER.remove(TIMER.NOTIFY_LIGHT_OFF);
 			}
 			S_TIMER.schedule(TIMER.NOTIFY_LIGHT_OFF, {
-				:period => S_DATA.getNotifyLightOffPeriod(),
+				:period => S_CONFIG.getNotifyLightOffPeriod(),
 				:callback => method(:notifyLightOff_callback),
 				:repeat => false});	
 		}

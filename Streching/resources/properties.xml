@@ -13,5 +13,6 @@
         <property id="soundOn" type="boolean">false</property>
         <property id="backlightOn" type="boolean">true</property>
         <property id="vibrationOn" type="boolean">true</property>
+        <property id="loggingOn" type="boolean">false</property>
     </properties>
 </resources>

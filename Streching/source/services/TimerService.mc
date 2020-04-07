@@ -1,8 +1,8 @@
 using Toybox.Timer;
 
-class TIMER {
+class TIMER{
 
-	enum {
+	enum{
 		REFRESH_VIEW,
 		REP_TIME,
 		REP_PAUSE_TIME,
@@ -41,7 +41,7 @@ class TIMER {
 	}
 }
 
-class TimerService {
+class TimerService{
 
 ////////////////////////////////////////////////////
 ////////////////////// PUBLIC //////////////////////
@@ -181,7 +181,7 @@ class TimerService {
 	
 	private function start() {
 		if(!isBaseTimerOn){
-			baseTimer.start(method(:timeOut), S_DATA.getBaseTimePeriod(), true);
+			baseTimer.start(method(:timeOut), S_CONFIG.getBaseTimePeriod(), true);
 			isBaseTimerOn = true;
 		}
 	}

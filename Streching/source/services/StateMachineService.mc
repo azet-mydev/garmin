@@ -1,6 +1,6 @@
-class SM {
+class SM{
 
-	enum {
+	enum{
 		INITIAL,
 		EXERCISE,
 		REST,
@@ -24,7 +24,7 @@ class SM {
 	}
 }
 
-class StateMachineService {
+class StateMachineService{
 
 	var config;
 	var stateIndex = -1;

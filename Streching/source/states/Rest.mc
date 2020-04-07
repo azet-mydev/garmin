@@ -1,9 +1,7 @@
 using Toybox.WatchUi;
-using Toybox.Time;
-using Toybox.Time.Gregorian;
 using Toybox.Lang;
 
-module Rest {
+module Rest{
 
 	////////////////////////////////////////////////////
 	////////////////////// SIGNALS /////////////////////
@@ -17,7 +15,7 @@ module Rest {
 		S_NOTIFY.signal(NOTIFY.STOP);
 		
 		S_DATA.addRestTime(S_TIMER.remove(TIMER.REST_TIME));
-		S_TIMER.schedule(TIMER.PAUSE_TIME, {:callback=>new Lang.Method(Common, :reportPause)});
+		S_TIMER.schedule(TIMER.PAUSE_TIME, {});
 		
         S_SM.transition(SM.SUMMARY);		
 	}
@@ -66,7 +64,7 @@ module Rest {
 	 	function onShow(){
 	 		 if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
 		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-					:period=>S_DATA.getRefreshPeriod(),
+					:period=>S_CONFIG.getRefreshPeriod(),
 					:callback=>method(:refreshView_callback), 
 					:repeat=>true});
 			}
@@ -89,19 +87,19 @@ module Rest {
 		}
 	}
 	
-	class RestDelegate extends Common.Delegate {
+	class RestDelegate extends Common.Delegate{
 	
-		function initialize() {
+		function initialize(){
 	        Delegate.initialize();
 	    }
 	    
-	    function onSelect() {
+	    function onSelect(){
 	    	LOG("Rest","onSelect()");
 			signal_Rest_pause();			
 	        return true;
 	    }
 	    
-	    function onBack() {
+	    function onBack(){
 	    	LOG("Rest","onBack()");
 			signal_Rest_nextExercise();
 			return true;

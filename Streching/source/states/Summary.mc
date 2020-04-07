@@ -2,7 +2,7 @@ using Toybox.WatchUi;
 using Toybox.System;
 using Toybox.Lang;
 
-module Summary {
+module Summary{
 
 	////////////////////////////////////////////////////
 	////////////////////// SIGNALS /////////////////////
@@ -51,7 +51,7 @@ module Summary {
 	
 	var showedSummaryMenu = false;
 	 
-	class SummaryView extends WatchUi.View {
+	class SummaryView extends WatchUi.View{
 	 	
 		function initialize(){
 			View.initialize();
@@ -67,13 +67,13 @@ module Summary {
 	 	
 		function onShow(){
 			S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-				:period=>S_DATA.getRefreshPeriod(),
+				:period=>S_CONFIG.getRefreshPeriod(),
 				:callback=>method(:refreshView_callback), 
 				:repeat=>true});
 				
 			if(!showedSummaryMenu){
 				S_TIMER.schedule(TIMER.SUMMENU_APPEAR, {
-					:period => S_DATA.getSummaryMenuAppearPeriod(),
+					:period => S_CONFIG.getSummaryMenuAppearPeriod(),
 					:callback => method(:showSummaryMenu),
 					:repeat => false});
 			}
@@ -83,7 +83,7 @@ module Summary {
 	 		S_TIMER.remove(TIMER.REFRESH_VIEW);
 	 	}
 	 	
-	 	function refreshView_callback() {
+	 	function refreshView_callback(){
 			WatchUi.requestUpdate();
 		} 
 	 	
@@ -94,9 +94,8 @@ module Summary {
 			var ex = View.findDrawableById("ex");
 			ex.setText(S_UTILITY.formatNullableData2(S_DATA.getExercise(), WatchUi.loadResource( Rez.Strings.Rep )));
 						
-			var counterVal = Activity.getActivityInfo().timerTime/1000;
 			var counter = View.findDrawableById("counter");
-			counter.setText(S_UTILITY.formatCounter(counterVal));
+			counter.setText(S_UTILITY.formatCounter(S_DATA.getActivityTime()));
 			
 			var hr = View.findDrawableById("hr");
 			hr.setText(S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, WatchUi.loadResource( Rez.Strings.Bps )));
@@ -108,7 +107,7 @@ module Summary {
 		}
 	}
 	
-	class SummaryDelegate extends Common.Delegate {
+	class SummaryDelegate extends Common.Delegate{
 	
 		function initialize(){
 	        Delegate.initialize();
@@ -129,7 +128,7 @@ module Summary {
 	    }
 	}
 	
-	class SummaryMenuView extends Rez.Menus.SummaryMenu {
+	class SummaryMenuView extends Rez.Menus.SummaryMenu{
 	
 		var showMenuTitleIndex;
 	
@@ -145,7 +144,7 @@ module Summary {
 			showMenuTitleIndex = 0;
 			
 			S_TIMER.schedule(TIMER.SUMMMENU_TITLE_CHANGE, {
-				:period => S_DATA.getSummaryMenuTitleSlideChangePeriod(),
+				:period => S_CONFIG.getSummaryMenuTitleSlideChangePeriod(),
 				:callback => method(:rollOverMenuTitile),
 				:repeat => true});
 			rollOverMenuTitile();
@@ -160,7 +159,7 @@ module Summary {
 		function rollOverMenuTitile(){
 			var info = Activity.getActivityInfo();
 			var value;
-			switch (showMenuTitleIndex % 4) {
+			switch (showMenuTitleIndex % 5) {
 				case 0: {
 					value = S_UTILITY.formatTimeNow();
 					break;
@@ -170,10 +169,14 @@ module Summary {
 					break;
 				}
 				case 2: {
-					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, WatchUi.loadResource( Rez.Strings.Cal ));
+					value = S_UTILITY.formatNullableData2(S_UTILITY.formatCounter(S_DATA.getActivityTime()), WatchUi.loadResource( Rez.Strings.Min ));
 					break;
 				}
 				case 3: {
+					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().calories, WatchUi.loadResource( Rez.Strings.Cal ));
+					break;
+				}
+				case 4: {
 					value = S_UTILITY.formatNullableData2(Activity.getActivityInfo().averageHeartRate, WatchUi.loadResource( Rez.Strings.Bps ));
 					break;
 				}
@@ -185,25 +188,25 @@ module Summary {
 		}
 	}
 	
-	class SummaryMenuTitleDrawable extends WatchUi.Drawable {
+	class SummaryMenuTitleDrawable extends WatchUi.Drawable{
 
-	    function initialize() {
+	    function initialize(){
 	        Drawable.initialize({});
 	    }
 	
-	    function draw(dc) {
+	    function draw(dc){
 	    	dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_BLACK);
 	        dc.drawText(dc.getWidth()/2, dc.getHeight()/2, Graphics.FONT_MEDIUM, summaryMenuTitle, Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER);
 	    }
 	}
 	
-	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate {
+	class SummaryMenuDelegate extends WatchUi.Menu2InputDelegate{
 	
-	    function initialize() {
+	    function initialize(){
 	        Menu2InputDelegate.initialize();
 	    }
 	    
-	    function onSelect(item) {
+	    function onSelect(item){
 	        if (item.getId() == :Continue){
 	        	LOG("Summary","SummaryMenuDelegate.onSelect(Continue)");
 				signal_Summary_unpause();
@@ -224,11 +227,11 @@ module Summary {
 		
 	class DiscardDialogDelegate extends WatchUi.Menu2InputDelegate {
 	
-	   	function initialize() {
+	   	function initialize(){
 	        Menu2InputDelegate.initialize();
 	    }
 	    
-	    function onSelect(item) {
+	    function onSelect(item){
 	        if (item.getId() == :Yes){
 	        	LOG("Summary","DiscardDialogDelegate.onSelect(Yes)");
 	        	

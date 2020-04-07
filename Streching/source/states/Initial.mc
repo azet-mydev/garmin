@@ -2,7 +2,7 @@ using Toybox.WatchUi;
 using Toybox.Sensor;
 using Toybox.Lang;
 
-module Initial {
+module Initial{
 
 	////////////////////////////////////////////////////
 	////////////////////// SIGNALS /////////////////////
@@ -23,13 +23,13 @@ module Initial {
 	////////////////////// \SIGNALS ////////////////////
 	////////////////////////////////////////////////////
 	
-	class InitialDelegate extends Common.Delegate {
+	class InitialDelegate extends Common.Delegate{
 	
-		function initialize() {
+		function initialize(){
 	        Delegate.initialize();
 	    }
 	    
-	    function onSelect() {
+	    function onSelect(){
 	    	LOG("Initial","InitialDelegate.onSelect()");
 	        
 	        signal_Initial_start();
@@ -37,7 +37,7 @@ module Initial {
 	    }
 	}
 	
-	class InitialView extends WatchUi.View {
+	class InitialView extends WatchUi.View{
 
 		function initialize(){
 	 		View.initialize();
@@ -53,7 +53,7 @@ module Initial {
 			time.setText(S_UTILITY.formatTimeNow());
 			
 			var counter = View.findDrawableById("counter");
-			counter.setText(S_UTILITY.formatCounter(S_DATA.getRepetitionInterval()));
+			counter.setText(S_UTILITY.formatCounter(S_CONFIG.getRepetitionInterval()));
 			
 			var hr = View.findDrawableById("hr");
 			var info = Sensor.getInfo();

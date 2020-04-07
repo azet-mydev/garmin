@@ -2,8 +2,7 @@ using Toybox.ActivityRecording;
 using Toybox.WatchUi;
 using Toybox.FitContributor;
 
-class ActivityService
-{
+class ActivityService{
 	var session = null;
 	
 	const ACTIVITY_TIMELINE_FIELDID = 0;
@@ -86,7 +85,7 @@ class ActivityService
 	}
 	
 	function lap(){
-		if(S_DATA.isLapOn()){
+		if(S_CONFIG.isLapOn()){
 			session.addLap();
 		}
 	}

@@ -2,7 +2,7 @@ using Toybox.WatchUi;
 using Toybox.Graphics;
 using Toybox.Lang;
 
-module Exercise {
+module Exercise{
 	
 	////////////////////////////////////////////////////
 	////////////////////// SIGNALS /////////////////////
@@ -16,7 +16,7 @@ module Exercise {
 		S_NOTIFY.signal(NOTIFY.STOP);
 		
 		S_DATA.addExerciseTime(S_TIMER.remove(TIMER.EXERCISE_TIME));
-		S_TIMER.schedule(TIMER.PAUSE_TIME, {:callback=>new Lang.Method(Common, :reportPause)});
+		S_TIMER.schedule(TIMER.PAUSE_TIME, {});
 		
         S_SM.transition(SM.SUMMARY);		
 	}
@@ -24,7 +24,7 @@ module Exercise {
 	function signal_Exercise_reset(){
     	LOG("Exercise","signal_Exercise_reset()");
     
-        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_DATA.getRepetitionInterval()});
+        S_TIMER.reset(TIMER.REP_TIME,{:period=>S_CONFIG.getRepetitionInterval()});
         
 		S_NOTIFY.signal(NOTIFY.LAP);		
 	}
@@ -50,7 +50,7 @@ module Exercise {
 	
 	var showedExerciseNumber = false;
 	
-	class ExerciseView extends WatchUi.View {
+	class ExerciseView extends WatchUi.View{
 	
 		function initialize(){
 	 		View.initialize();
@@ -77,13 +77,13 @@ module Exercise {
 			
 			dc.setColor(Graphics.COLOR_LT_GRAY, Graphics.COLOR_BLACK);    	
 	    	dc.setPenWidth(10);
-			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/S_DATA.getRepetitionInterval());
+			dc.drawArc(dc.getWidth()/2, dc.getHeight()/2, dc.getWidth()/2, Graphics.ARC_COUNTER_CLOCKWISE, 90, 90 + 360*counterVal/S_CONFIG.getRepetitionInterval());
 	 	}
 	 	
 	 	function onShow(){
 	 		if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
 		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
-					:period=>S_DATA.getRefreshPeriod(),
+					:period=>S_CONFIG.getRefreshPeriod(),
 					:callback=>method(:refreshView_callback), 
 					:repeat=>true});
 			}
@@ -93,7 +93,7 @@ module Exercise {
 					S_TIMER.resume(TIMER.REP_TIME);
 				} else {
 					S_TIMER.schedule(TIMER.REP_TIME, {
-						:period=>S_DATA.getRepetitionInterval(),
+						:period=>S_CONFIG.getRepetitionInterval(),
 						:callback=>method(:signal_Exercise_goRest), 
 						:repeat=>false});
 				}
@@ -113,7 +113,7 @@ module Exercise {
 		} 
 	}
 	
-	class ExerciseDelegate extends Common.Delegate {
+	class ExerciseDelegate extends Common.Delegate{
 	
 		function initialize(){
 	        Delegate.initialize();
@@ -132,7 +132,7 @@ module Exercise {
 	    }
 	}
 	
-	class ExerciseNumberView extends WatchUi.View {
+	class ExerciseNumberView extends WatchUi.View{
 		
 		function initialize(){
 	 		View.initialize();
@@ -146,7 +146,7 @@ module Exercise {
 	 		showedExerciseNumber = true;
 	 		S_DATA.addExercise();
 	 		S_TIMER.schedule(TIMER.EXERCISE_NUMBER, {
-				:period=>S_DATA.getExerciseNumberDisappearPeriod(),
+				:period=>S_CONFIG.getExerciseNumberDisappearPeriod(),
 				:callback=>method(:exerciseNumberTimeout_callback), 
 				:repeat=>false});
 	 	}

@@ -1,0 +1,35 @@
+<strings>
+    <string id="AppName">Stretching</string>
+    
+    <string id="Exercise">Ćwiczenie</string>
+    
+    <string id="Settings">Ustawienia</string>
+    <string id="RepetitionInterval">Czas powtórzenia</string>
+    <string id="Sound">Dźwięk</string>
+    <string id="Vibration">Wibracje</string>
+    <string id="Backlight">Podświetlenie</string>
+    <string id="Lap">Okrążenie</string>
+    <string id="Logging">Logowanie</string>
+    
+    <string id="Continue">Wznów</string>
+    <string id="Save">Zapisz</string>
+    <string id="Discard">Odrzuć</string>
+    
+    <string id="AreYouSure">Odrzucić?</string>
+    <string id="Yes">Tak</string>
+    <string id="No">Nie</string>
+    
+    <string id="Rep">rep</string>
+    <string id="Bps">bps</string>
+    <string id="Cal">cal</string>
+    <string id="Min">min</string>
+    
+    <string id="ActivityTimeline">Przebieg aktywności</string>
+    <string id="NumberOfExercises">Ilość powtórzeń</string>
+    <string id="ActivityTime">Czas Aktywności</string>
+    <string id="ExerciseTime">Czas ćwiczeń</string>
+    <string id="RestTime">Czas odpoczynku</string>
+    <string id="PauseTime">Czas przerwy</string>
+    
+    <string id="Blank"></string>        
+</strings>
