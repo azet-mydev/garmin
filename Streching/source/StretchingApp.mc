@@ -1,10 +1,16 @@
 using Toybox.Application;
 using Toybox.Sensor;
+using Toybox.System;
 
 class StretchingApp extends Application.AppBase{
 	
     function initialize(){
     	LOG("StretchingApp", "Starting application: " + S_CONFIG.getAppVersion());
+    	LOG("StretchingApp", "partNumber: " + System.getDeviceSettings().partNumber);
+    	LOG("StretchingApp", "firmwareVersion: " + System.getDeviceSettings().firmwareVersion);
+    	LOG("StretchingApp", "monkeyVersion: " + System.getDeviceSettings().monkeyVersion);
+    	LOG("StretchingApp", "systemLanguage: " + System.getDeviceSettings().systemLanguage);
+    	LOG("StretchingApp", "uniqueIdentifier: " + System.getDeviceSettings().uniqueIdentifier);
     	
         AppBase.initialize();
         Sensor.setEnabledSensors([Sensor.SENSOR_HEARTRATE]);

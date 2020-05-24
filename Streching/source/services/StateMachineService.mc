@@ -34,6 +34,14 @@ class StateMachineService{
 		self.config = config;
 	}
 	
+	function getCurrent(){
+		return getHistory(0);
+	}
+	
+	function getPrevious(){
+		return getHistory(-1);
+	}
+	
 	function saveHistory(newState){
 		stateIndex++;
 		stateHistory.put(stateIndex, newState);

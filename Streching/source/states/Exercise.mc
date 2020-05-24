@@ -81,6 +81,7 @@ module Exercise{
 	 	}
 	 	
 	 	function onShow(){
+	 		LOG("Exercise","ExerciseView.onShow()");
 	 		if(S_TIMER.isNotRunning(TIMER.REFRESH_VIEW)){
 		 	    S_TIMER.schedule(TIMER.REFRESH_VIEW, {
 					:period=>S_CONFIG.getRefreshPeriod(),

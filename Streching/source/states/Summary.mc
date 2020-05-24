@@ -14,7 +14,7 @@ module Summary{
         S_NOTIFY.signal(NOTIFY.START);
         showedSummaryMenu = false;
         
-        var prevState = S_SM.getHistory(-1);
+        var prevState = S_SM.getPrevious();
         
         if(prevState==SM.EXERCISE){
 			S_DATA.addPauseTime(S_TIMER.remove(TIMER.PAUSE_TIME));

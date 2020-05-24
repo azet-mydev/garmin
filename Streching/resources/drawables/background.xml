@@ -1,6 +1,4 @@
 <drawables>
-    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
-    
     <drawable-list id="whiteBackground">
 		<shape type="rectangle" x="0" y="0" width="fill" height="fill" color="Graphics.COLOR_WHITE" />
 		<shape type="rectangle" x="10%" y="30%" width="80%" height="1" color="Graphics.COLOR_BLACK" />
@@ -11,5 +9,4 @@
 		<shape type="rectangle" x="10%" y="30%" width="80%" height="1" color="Graphics.COLOR_WHITE" />
 		<shape type="rectangle" x="10%" y="70%" width="80%" height="1" color="Graphics.COLOR_WHITE" />
 	</drawable-list>
-	
 </drawables>

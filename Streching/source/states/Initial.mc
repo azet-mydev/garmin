@@ -35,6 +35,11 @@ module Initial{
 	        signal_Initial_start();
 	        return true;
 	    }
+	    
+	    function onBack(){
+	    	LOG("Initial","InitialDelegate.onBack()");
+	    	System.exit();
+	    }
 	}
 	
 	class InitialView extends WatchUi.View{
@@ -63,6 +68,7 @@ module Initial{
 	 	}
 	 	
 	 	function onShow(){
+	 		LOG("Initial","InitialView.onShow()");
 	 		Sensor.enableSensorEvents(method(:onSensor_callback));
 	 	}
 	 	
