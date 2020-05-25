@@ -48,7 +48,9 @@ class TimerService{
 ////////////////////////////////////////////////////
 	
 	function schedule(name, options){
-		Test.assertMessage(!timers.hasKey(name), "Timer:" + TIMER.toString(name) + " already scheduled, overriding!");
+		if(timers.hasKey(name)){
+			LOG("TimerService", "Timer:" + TIMER.toString(name) + " already scheduled, overriding!");
+		}
 		
 		options.put(:counter, 0);
 		timers.put(name, options);
@@ -156,7 +158,6 @@ class TimerService{
 	private var isBaseTimerOn = false;
 	
 	function timeOut(){
-		LOG("TimerService", "timeOut!");
 		for( var i = 0; i < timers.keys().size(); i += 1 ) {
 			var name = timers.keys()[i];
 			var counter = timers.get(name).get(:counter);
